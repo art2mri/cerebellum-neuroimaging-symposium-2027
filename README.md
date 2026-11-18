@@ -16,7 +16,7 @@ Registration is open through Humanitix:
 
 Abstract submissions are open until **January 31, 2027**:
 
-**https://script.google.com/macros/s/AKfycbzxmXwP92qZpK_m6H8xTC2pxMLSGHmQOXbpyVD_AnguMFb_h_abT6oJTMD3VHL38UUwUA/exec**
+**https://script.google.com/macros/s/AKfycbwlPE1hTAZfX9sOHoq4Z5oPZucKKnAcLwbAwYrkFljH81HnVh9vMc677I-AoZWqF3JHVg/exec**
 
 The public submission form is hosted as a Google Apps Script web app administered through the symposium Google Drive. It follows the symposium template: presenting-author details, oral/poster preference, scientific topic, title and authors, a structured abstract of up to 500 words, and up to two optional figures. Respondents do not need a Google or Gmail account to submit or upload figures.
 
