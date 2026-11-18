@@ -1,0 +1,136 @@
+name: Open abstract submissions
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  update-site:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Link public abstract submission form
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+
+          path = Path('index.html')
+          html = path.read_text(encoding='utf-8')
+
+          registration_button = '''        <a class="btn interest" href="https://events.humanitix.com/cerebellum-neuroimaging-symposium-2027" target="_blank" rel="noopener noreferrer">Register now</a>'''
+          abstract_button = registration_button + '''
+        <a class="btn primary" href="abstract-submission.html">Submit abstract</a>'''
+          if 'href="abstract-submission.html">Submit abstract</a>' not in html:
+              if registration_button not in html:
+                  raise SystemExit('Registration hero button not found')
+              html = html.replace(registration_button, abstract_button, 1)
+
+          card_pattern = re.compile(
+              r'''      <article class="date-card">\s*<span class="status">Opening soon</span>\s*<strong>Abstract Submission</strong>\s*<span>Submission guidelines and deadlines will be announced\.</span>\s*</article>''',
+              re.S,
+          )
+          new_card = '''      <article class="date-card">
+        <span class="status open">Open now</span>
+        <strong>Abstract Submission</strong>
+        <span>Submission deadline: January 31, 2027.</span>
+      </article>'''
+          html, card_count = card_pattern.subn(new_card, html, count=1)
+          if card_count != 1:
+              raise SystemExit(f'Expected one abstract date card, changed {card_count}')
+
+          abstract_pattern = re.compile(
+              r'''<section id="abstracts">.*?</section>\s*\n\s*<section id="registration"''',
+              re.S,
+          )
+          new_abstract = '''<section id="abstracts">
+  <div class="container split">
+    <div>
+      <p class="kicker">Scientific contributions</p>
+      <h2>Abstract Submission</h2>
+    </div>
+    <div class="coming-panel">
+      <span class="meta">Submissions open</span>
+      <h3>Submit your abstract by January 31, 2027.</h3>
+      <p>Abstracts may address any aspect of cerebellar neuroimaging methodology or its application in health or disease. Submissions are limited to 500 words, structured as Background, Methods, Results and Conclusions, and may include up to two optional figures.</p>
+      <p><strong>No Google or Gmail account is required.</strong></p>
+      <a class="btn primary" href="abstract-submission.html">Submit abstract →</a>
+    </div>
+  </div>
+</section>
+
+<section id="registration"'''
+          html, section_count = abstract_pattern.subn(new_abstract, html, count=1)
+          if section_count != 1:
+              raise SystemExit(f'Expected one abstract section, changed {section_count}')
+
+          path.write_text(html, encoding='utf-8')
+
+          readme = '''# Cerebellum Neuroimaging Symposium 2027
+
+Official website repository for the **Cerebellum Neuroimaging Symposium 2027**, an international scientific meeting focused on cerebellar imaging, clinical translation, and trial-ready biomarkers.
+
+## Live website
+
+**https://art2mri.github.io/cerebellum-neuroimaging-symposium-2027/**
+
+## Registration
+
+Registration is open through Humanitix:
+
+**https://events.humanitix.com/cerebellum-neuroimaging-symposium-2027**
+
+## Abstract submission
+
+Abstract submissions are open until **January 31, 2027**:
+
+**https://art2mri.github.io/cerebellum-neuroimaging-symposium-2027/abstract-submission.html**
+
+The public submission form follows the symposium template: presenting-author details, oral/poster preference, scientific topic, title and authors, a structured abstract of up to 500 words, and up to two optional figures. Respondents do not need a Google or Gmail account to submit or upload figures.
+
+## Current website contents
+
+The website includes:
+- active registration links to the official Humanitix page
+- active abstract-submission form
+- Important Dates
+- confirmed keynote speakers and photographs
+- preliminary three-day scientific program
+- hands-on MRI workshop venue at Hospital de Clínicas da UNICAMP
+- main symposium venue at IOU, University of Campinas
+- Travel & Accommodation recommendations
+- Steering Committee
+- confirmed sponsors FARA and AGI
+
+## Repository structure
+
+Main files:
+- `index.html`
+- `abstract-submission.html`
+- `abstract-submission-thank-you.html`
+- `assets/`
+- `README.md`
+
+## Updating the site
+
+GitHub Pages publishes the website directly from the `main` branch.
+'''
+          Path('README.md').write_text(readme, encoding='utf-8')
+          PY
+
+      - name: Commit site update and remove one-time workflow
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git rm .github/workflows/open-abstract-submission.yml
+          git add index.html README.md
+          git commit -m "Open abstract submissions"
+          git push
