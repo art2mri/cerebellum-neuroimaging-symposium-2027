@@ -1,0 +1,93 @@
+name: Connect abstract submission to Apps Script
+
+on:
+  push:
+    paths:
+      - .github/workflows/connect-apps-script.yml
+
+permissions:
+  contents: write
+
+jobs:
+  update-site:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Replace FormSubmit with the Google Apps Script web app
+        env:
+          WEB_APP_URL: https://script.google.com/macros/s/AKfycbxjLAjXCoOOJL5HyFiJ6Fu1guY1LVf8J_dA0TQ0_Jqe7rulUSES_HtSdaGMFTRh6QVXnA/exec
+          OLD_PUBLIC_FORM: https://art2mri.github.io/cerebellum-neuroimaging-symposium-2027/abstract-submission.html
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import os
+
+          web_app_url = os.environ["WEB_APP_URL"]
+          old_public_form = os.environ["OLD_PUBLIC_FORM"]
+
+          index = Path("index.html")
+          text = index.read_text(encoding="utf-8")
+          text = text.replace(
+              'href="abstract-submission.html"',
+              f'href="{web_app_url}" target="_blank" rel="noopener noreferrer"'
+          )
+          text = text.replace(
+              f'href="{old_public_form}"',
+              f'href="{web_app_url}" target="_blank" rel="noopener noreferrer"'
+          )
+          index.write_text(text, encoding="utf-8")
+
+          redirect_page = f'''<!doctype html>
+          <html lang="en">
+          <head>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <meta http-equiv="refresh" content="0; url={web_app_url}">
+            <link rel="canonical" href="{web_app_url}">
+            <title>Abstract Submission · CNS2027</title>
+            <style>
+              :root {{ --ink:#14213d; --muted:#607080; --line:#dfe6ec; --primary:#0b7285; --soft:#f5f8fa; }}
+              * {{ box-sizing:border-box; }}
+              body {{ margin:0; min-height:100vh; display:grid; place-items:center; padding:24px; font-family:Arial,Helvetica,sans-serif; color:var(--ink); background:var(--soft); }}
+              main {{ width:min(100%,680px); padding:42px; background:#fff; border:1px solid var(--line); border-top:6px solid var(--primary); text-align:center; }}
+              h1 {{ margin:0 0 14px; font-family:Georgia,'Times New Roman',serif; font-size:38px; }}
+              p {{ color:var(--muted); line-height:1.6; }}
+              a {{ display:inline-flex; min-height:46px; align-items:center; justify-content:center; margin-top:12px; padding:0 20px; border-radius:3px; background:var(--primary); color:#fff; text-decoration:none; font-weight:700; }}
+            </style>
+            <script>window.location.replace({web_app_url!r});</script>
+          </head>
+          <body>
+            <main>
+              <h1>Abstract Submission</h1>
+              <p>You are being redirected to the secure CNS2027 abstract-submission form. No Google or Gmail account is required.</p>
+              <a href="{web_app_url}">Open the submission form →</a>
+            </main>
+          </body>
+          </html>
+          '''
+          Path("abstract-submission.html").write_text(redirect_page, encoding="utf-8")
+
+          readme = Path("README.md")
+          if readme.exists():
+              readme_text = readme.read_text(encoding="utf-8")
+              readme_text = readme_text.replace(old_public_form, web_app_url)
+              readme_text = readme_text.replace(
+                  "The public submission form follows the symposium template: presenting-author details, oral/poster preference, scientific topic, title and authors, a structured abstract of up to 500 words, and up to two optional figures. Respondents do not need a Google or Gmail account to submit or upload figures.",
+                  "The public submission form is hosted as a Google Apps Script web app administered through the symposium Google Drive. It follows the symposium template: presenting-author details, oral/poster preference, scientific topic, title and authors, a structured abstract of up to 500 words, and up to two optional figures. Respondents do not need a Google or Gmail account to submit or upload figures."
+              )
+              readme.write_text(readme_text, encoding="utf-8")
+
+          workflow = Path(".github/workflows/connect-apps-script.yml")
+          if workflow.exists():
+              workflow.unlink()
+          PY
+
+      - name: Commit the integration
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html abstract-submission.html README.md .github/workflows/connect-apps-script.yml
+          git commit -m "Use Google Apps Script for abstract submissions"
+          git push
