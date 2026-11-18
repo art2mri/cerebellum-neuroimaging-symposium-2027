@@ -20,108 +20,28 @@ jobs:
         run: |
           python3 - <<'PY'
           from pathlib import Path
+          import base64
           import re
-
           path = Path('index.html')
           html = path.read_text(encoding='utf-8')
-
-          registration_button = '''        <a class="btn interest" href="https://events.humanitix.com/cerebellum-neuroimaging-symposium-2027" target="_blank" rel="noopener noreferrer">Register now</a>'''
-          abstract_button = registration_button + '''
-        <a class="btn primary" href="abstract-submission.html">Submit abstract</a>'''
+          registration_button = '        <a class="btn interest" href="https://events.humanitix.com/cerebellum-neuroimaging-symposium-2027" target="_blank" rel="noopener noreferrer">Register now</a>'
+          abstract_button = registration_button + '\n        <a class="btn primary" href="abstract-submission.html">Submit abstract</a>'
           if 'href="abstract-submission.html">Submit abstract</a>' not in html:
               if registration_button not in html:
                   raise SystemExit('Registration hero button not found')
               html = html.replace(registration_button, abstract_button, 1)
-
-          card_pattern = re.compile(
-              r'''      <article class="date-card">\s*<span class="status">Opening soon</span>\s*<strong>Abstract Submission</strong>\s*<span>Submission guidelines and deadlines will be announced\.</span>\s*</article>''',
-              re.S,
-          )
-          new_card = '''      <article class="date-card">
-        <span class="status open">Open now</span>
-        <strong>Abstract Submission</strong>
-        <span>Submission deadline: January 31, 2027.</span>
-      </article>'''
+          card_pattern = re.compile(r'      <article class="date-card">\s*<span class="status">Opening soon</span>\s*<strong>Abstract Submission</strong>\s*<span>Submission guidelines and deadlines will be announced\.</span>\s*</article>', re.S)
+          new_card = base64.b64decode('ICAgICAgPGFydGljbGUgY2xhc3M9ImRhdGUtY2FyZCI+CiAgICAgICAgPHNwYW4gY2xhc3M9InN0YXR1cyBvcGVuIj5PcGVuIG5vdzwvc3Bhbj4KICAgICAgICA8c3Ryb25nPkFic3RyYWN0IFN1Ym1pc3Npb248L3N0cm9uZz4KICAgICAgICA8c3Bhbj5TdWJtaXNzaW9uIGRlYWRsaW5lOiBKYW51YXJ5IDMxLCAyMDI3Ljwvc3Bhbj4KICAgICAgPC9hcnRpY2xlPg==').decode('utf-8')
           html, card_count = card_pattern.subn(new_card, html, count=1)
           if card_count != 1:
               raise SystemExit(f'Expected one abstract date card, changed {card_count}')
-
-          abstract_pattern = re.compile(
-              r'''<section id="abstracts">.*?</section>\s*\n\s*<section id="registration"''',
-              re.S,
-          )
-          new_abstract = '''<section id="abstracts">
-  <div class="container split">
-    <div>
-      <p class="kicker">Scientific contributions</p>
-      <h2>Abstract Submission</h2>
-    </div>
-    <div class="coming-panel">
-      <span class="meta">Submissions open</span>
-      <h3>Submit your abstract by January 31, 2027.</h3>
-      <p>Abstracts may address any aspect of cerebellar neuroimaging methodology or its application in health or disease. Submissions are limited to 500 words, structured as Background, Methods, Results and Conclusions, and may include up to two optional figures.</p>
-      <p><strong>No Google or Gmail account is required.</strong></p>
-      <a class="btn primary" href="abstract-submission.html">Submit abstract →</a>
-    </div>
-  </div>
-</section>
-
-<section id="registration"'''
+          abstract_pattern = re.compile(r'<section id="abstracts">.*?</section>\s*\n\s*<section id="registration"', re.S)
+          new_abstract = base64.b64decode('PHNlY3Rpb24gaWQ9ImFic3RyYWN0cyI+CiAgPGRpdiBjbGFzcz0iY29udGFpbmVyIHNwbGl0Ij4KICAgIDxkaXY+CiAgICAgIDxwIGNsYXNzPSJraWNrZXIiPlNjaWVudGlmaWMgY29udHJpYnV0aW9uczwvcD4KICAgICAgPGgyPkFic3RyYWN0IFN1Ym1pc3Npb248L2gyPgogICAgPC9kaXY+CiAgICA8ZGl2IGNsYXNzPSJjb21pbmctcGFuZWwiPgogICAgICA8c3BhbiBjbGFzcz0ibWV0YSI+U3VibWlzc2lvbnMgb3Blbjwvc3Bhbj4KICAgICAgPGgzPlN1Ym1pdCB5b3VyIGFic3RyYWN0IGJ5IEphbnVhcnkgMzEsIDIwMjcuPC9oMz4KICAgICAgPHA+QWJzdHJhY3RzIG1heSBhZGRyZXNzIGFueSBhc3BlY3Qgb2YgY2VyZWJlbGxhciBuZXVyb2ltYWdpbmcgbWV0aG9kb2xvZ3kgb3IgaXRzIGFwcGxpY2F0aW9uIGluIGhlYWx0aCBvciBkaXNlYXNlLiBTdWJtaXNzaW9ucyBhcmUgbGltaXRlZCB0byA1MDAgd29yZHMsIHN0cnVjdHVyZWQgYXMgQmFja2dyb3VuZCwgTWV0aG9kcywgUmVzdWx0cyBhbmQgQ29uY2x1c2lvbnMsIGFuZCBtYXkgaW5jbHVkZSB1cCB0byB0d28gb3B0aW9uYWwgZmlndXJlcy48L3A+CiAgICAgIDxwPjxzdHJvbmc+Tm8gR29vZ2xlIG9yIEdtYWlsIGFjY291bnQgaXMgcmVxdWlyZWQuPC9zdHJvbmc+PC9wPgogICAgICA8YSBjbGFzcz0iYnRuIHByaW1hcnkiIGhyZWY9ImFic3RyYWN0LXN1Ym1pc3Npb24uaHRtbCI+U3VibWl0IGFic3RyYWN0IOKGkjwvYT4KICAgIDwvZGl2PgogIDwvZGl2Pgo8L3NlY3Rpb24+Cgo8c2VjdGlvbiBpZD0icmVnaXN0cmF0aW9uIg==').decode('utf-8')
           html, section_count = abstract_pattern.subn(new_abstract, html, count=1)
           if section_count != 1:
               raise SystemExit(f'Expected one abstract section, changed {section_count}')
-
           path.write_text(html, encoding='utf-8')
-
-          readme = '''# Cerebellum Neuroimaging Symposium 2027
-
-Official website repository for the **Cerebellum Neuroimaging Symposium 2027**, an international scientific meeting focused on cerebellar imaging, clinical translation, and trial-ready biomarkers.
-
-## Live website
-
-**https://art2mri.github.io/cerebellum-neuroimaging-symposium-2027/**
-
-## Registration
-
-Registration is open through Humanitix:
-
-**https://events.humanitix.com/cerebellum-neuroimaging-symposium-2027**
-
-## Abstract submission
-
-Abstract submissions are open until **January 31, 2027**:
-
-**https://art2mri.github.io/cerebellum-neuroimaging-symposium-2027/abstract-submission.html**
-
-The public submission form follows the symposium template: presenting-author details, oral/poster preference, scientific topic, title and authors, a structured abstract of up to 500 words, and up to two optional figures. Respondents do not need a Google or Gmail account to submit or upload figures.
-
-## Current website contents
-
-The website includes:
-- active registration links to the official Humanitix page
-- active abstract-submission form
-- Important Dates
-- confirmed keynote speakers and photographs
-- preliminary three-day scientific program
-- hands-on MRI workshop venue at Hospital de Clínicas da UNICAMP
-- main symposium venue at IOU, University of Campinas
-- Travel & Accommodation recommendations
-- Steering Committee
-- confirmed sponsors FARA and AGI
-
-## Repository structure
-
-Main files:
-- `index.html`
-- `abstract-submission.html`
-- `abstract-submission-thank-you.html`
-- `assets/`
-- `README.md`
-
-## Updating the site
-
-GitHub Pages publishes the website directly from the `main` branch.
-'''
+          readme = base64.b64decode('IyBDZXJlYmVsbHVtIE5ldXJvaW1hZ2luZyBTeW1wb3NpdW0gMjAyNwoKT2ZmaWNpYWwgd2Vic2l0ZSByZXBvc2l0b3J5IGZvciB0aGUgKipDZXJlYmVsbHVtIE5ldXJvaW1hZ2luZyBTeW1wb3NpdW0gMjAyNyoqLCBhbiBpbnRlcm5hdGlvbmFsIHNjaWVudGlmaWMgbWVldGluZyBmb2N1c2VkIG9uIGNlcmViZWxsYXIgaW1hZ2luZywgY2xpbmljYWwgdHJhbnNsYXRpb24sIGFuZCB0cmlhbC1yZWFkeSBiaW9tYXJrZXJzLgoKIyMgTGl2ZSB3ZWJzaXRlCgoqKmh0dHBzOi8vYXJ0Mm1yaS5naXRodWIuaW8vY2VyZWJlbGx1bS1uZXVyb2ltYWdpbmctc3ltcG9zaXVtLTIwMjcvKioKCiMjIFJlZ2lzdHJhdGlvbgoKUmVnaXN0cmF0aW9uIGlzIG9wZW4gdGhyb3VnaCBIdW1hbml0aXg6CgoqKmh0dHBzOi8vZXZlbnRzLmh1bWFuaXRpeC5jb20vY2VyZWJlbGx1bS1uZXVyb2ltYWdpbmctc3ltcG9zaXVtLTIwMjcqKgoKIyMgQWJzdHJhY3Qgc3VibWlzc2lvbgoKQWJzdHJhY3Qgc3VibWlzc2lvbnMgYXJlIG9wZW4gdW50aWwgKipKYW51YXJ5IDMxLCAyMDI3Kio6CgoqKmh0dHBzOi8vYXJ0Mm1yaS5naXRodWIuaW8vY2VyZWJlbGx1bS1uZXVyb2ltYWdpbmctc3ltcG9zaXVtLTIwMjcvYWJzdHJhY3Qtc3VibWlzc2lvbi5odG1sKioKClRoZSBwdWJsaWMgc3VibWlzc2lvbiBmb3JtIGZvbGxvd3MgdGhlIHN5bXBvc2l1bSB0ZW1wbGF0ZTogcHJlc2VudGluZy1hdXRob3IgZGV0YWlscywgb3JhbC9wb3N0ZXIgcHJlZmVyZW5jZSwgc2NpZW50aWZpYyB0b3BpYywgdGl0bGUgYW5kIGF1dGhvcnMsIGEgc3RydWN0dXJlZCBhYnN0cmFjdCBvZiB1cCB0byA1MDAgd29yZHMsIGFuZCB1cCB0byB0d28gb3B0aW9uYWwgZmlndXJlcy4gUmVzcG9uZGVudHMgZG8gbm90IG5lZWQgYSBHb29nbGUgb3IgR21haWwgYWNjb3VudCB0byBzdWJtaXQgb3IgdXBsb2FkIGZpZ3VyZXMuCgojIyBDdXJyZW50IHdlYnNpdGUgY29udGVudHMKClRoZSB3ZWJzaXRlIGluY2x1ZGVzOgotIGFjdGl2ZSByZWdpc3RyYXRpb24gbGlua3MgdG8gdGhlIG9mZmljaWFsIEh1bWFuaXRpeCBwYWdlCi0gYWN0aXZlIGFic3RyYWN0LXN1Ym1pc3Npb24gZm9ybQotIEltcG9ydGFudCBEYXRlcwotIGNvbmZpcm1lZCBrZXlub3RlIHNwZWFrZXJzIGFuZCBwaG90b2dyYXBocwotIHByZWxpbWluYXJ5IHRocmVlLWRheSBzY2llbnRpZmljIHByb2dyYW0KLSBoYW5kcy1vbiBNUkkgd29ya3Nob3AgdmVudWUgYXQgSG9zcGl0YWwgZGUgQ2zDrW5pY2FzIGRhIFVOSUNBTVAKLSBtYWluIHN5bXBvc2l1bSB2ZW51ZSBhdCBJT1UsIFVuaXZlcnNpdHkgb2YgQ2FtcGluYXMKLSBUcmF2ZWwgJiBBY2NvbW1vZGF0aW9uIHJlY29tbWVuZGF0aW9ucwotIFN0ZWVyaW5nIENvbW1pdHRlZQotIGNvbmZpcm1lZCBzcG9uc29ycyBGQVJBIGFuZCBBR0kKCiMjIFJlcG9zaXRvcnkgc3RydWN0dXJlCgpNYWluIGZpbGVzOgotIGBpbmRleC5odG1sYAotIGBhYnN0cmFjdC1zdWJtaXNzaW9uLmh0bWxgCi0gYGFic3RyYWN0LXN1Ym1pc3Npb24tdGhhbmsteW91Lmh0bWxgCi0gYGFzc2V0cy9gCi0gYFJFQURNRS5tZGAKCiMjIFVwZGF0aW5nIHRoZSBzaXRlCgpHaXRIdWIgUGFnZXMgcHVibGlzaGVzIHRoZSB3ZWJzaXRlIGRpcmVjdGx5IGZyb20gdGhlIGBtYWluYCBicmFuY2guCg==').decode('utf-8')
           Path('README.md').write_text(readme, encoding='utf-8')
           PY
 
