@@ -16,9 +16,9 @@ Registration is open through Humanitix:
 
 Abstract submissions are open until **January 31, 2027**:
 
-**https://art2mri.github.io/cerebellum-neuroimaging-symposium-2027/abstract-submission.html**
+**https://script.google.com/macros/s/AKfycbxjLAjXCoOOJL5HyFiJ6Fu1guY1LVf8J_dA0TQ0_Jqe7rulUSES_HtSdaGMFTRh6QVXnA/exec**
 
-The public submission form follows the symposium template: presenting-author details, oral/poster preference, scientific topic, title and authors, a structured abstract of up to 500 words, and up to two optional figures. Respondents do not need a Google or Gmail account to submit or upload figures.
+The public submission form is hosted as a Google Apps Script web app administered through the symposium Google Drive. It follows the symposium template: presenting-author details, oral/poster preference, scientific topic, title and authors, a structured abstract of up to 500 words, and up to two optional figures. Respondents do not need a Google or Gmail account to submit or upload figures.
 
 ## Current website contents
 
