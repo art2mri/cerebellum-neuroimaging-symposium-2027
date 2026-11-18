@@ -4,42 +4,45 @@ Official website repository for the **Cerebellum Neuroimaging Symposium 2027**, 
 
 ## Live website
 
-Access the public site here:
-
 **https://art2mri.github.io/cerebellum-neuroimaging-symposium-2027/**
 
 ## Registration
 
-Registration is now open through Humanitix:
+Registration is open through Humanitix:
 
 **https://events.humanitix.com/cerebellum-neuroimaging-symposium-2027**
 
+## Abstract submission
+
+Abstract submissions are open until **January 31, 2027**:
+
+**https://art2mri.github.io/cerebellum-neuroimaging-symposium-2027/abstract-submission.html**
+
+The public submission form follows the symposium template: presenting-author details, oral/poster preference, scientific topic, title and authors, a structured abstract of up to 500 words, and up to two optional figures. Respondents do not need a Google or Gmail account to submit or upload figures.
+
 ## Current website contents
 
-The website currently includes:
-- active **Registration** links to the official Humanitix page
-- **Important Dates** section
-- confirmed keynote speakers and speaker photos
+The website includes:
+- active registration links to the official Humanitix page
+- active abstract-submission form
+- Important Dates
+- confirmed keynote speakers and photographs
 - preliminary three-day scientific program
-- dedicated **Abstract Submission** section marked as opening soon
-- hands-on MRI workshop venue at **Hospital de Clínicas da UNICAMP (HC)**
-- main symposium venue at **IOU, University of Campinas** with Google Maps access
-- **Travel & Accommodation** recommendations and transportation guidance
-- Steering Committee with member photos and **Co-Chair** tags for Thiago Rezende and Ian Harding
-- confirmed sponsors: **Friedreich's Ataxia Research Alliance (FARA)** and **Ataxia Global Initiative (AGI)**
+- hands-on MRI workshop venue at Hospital de Clínicas da UNICAMP
+- main symposium venue at IOU, University of Campinas
+- Travel & Accommodation recommendations
+- Steering Committee
+- confirmed sponsors FARA and AGI
 
 ## Repository structure
 
 Main files:
 - `index.html`
+- `abstract-submission.html`
+- `abstract-submission-thank-you.html`
 - `assets/`
 - `README.md`
 
-## Abstract submission
-
-The current **Opening soon** placeholder can be replaced by a direct link to the selected abstract-submission platform when submissions open.
-
 ## Updating the site
 
-GitHub Pages publishes the website directly from the repository.
-After editing and pushing changes to the `main` branch, the live website is updated automatically.
+GitHub Pages publishes the website directly from the `main` branch.
