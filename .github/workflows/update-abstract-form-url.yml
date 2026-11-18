@@ -1,0 +1,49 @@
+name: Update abstract form URL
+
+on:
+  push:
+    paths:
+      - '.github/workflows/update-abstract-form-url.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  update-url:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Replace the abstract submission deployment URL
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          old = 'https://script.google.com/macros/s/AKfycbxjLAjXCoOOJL5HyFiJ6Fu1guY1LVf8J_dA0TQ0_Jqe7rulUSES_HtSdaGMFTRh6QVXnA/exec'
+          new = 'https://script.google.com/macros/s/AKfycbzxmXwP92qZpK_m6H8xTC2pxMLSGHmQOXbpyVD_AnguMFb_h_abT6oJTMD3VHL38UUwUA/exec'
+          paths = [Path('index.html'), Path('abstract-submission.html'), Path('README.md')]
+          replacements = 0
+
+          for path in paths:
+              text = path.read_text(encoding='utf-8')
+              count = text.count(old)
+              if count:
+                  path.write_text(text.replace(old, new), encoding='utf-8')
+                  replacements += count
+                  print(f'{path}: replaced {count} occurrence(s)')
+              else:
+                  print(f'{path}: no old URL found')
+
+          if replacements == 0:
+              raise SystemExit('The previous deployment URL was not found in any target file.')
+          print(f'Total replacements: {replacements}')
+          PY
+
+      - name: Commit updated links
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add index.html abstract-submission.html README.md
+          git commit -m 'Update abstract submission deployment URL'
+          git push
