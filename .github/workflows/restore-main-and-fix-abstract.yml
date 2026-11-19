@@ -97,3 +97,5 @@ jobs:
           git add index.html abstract-submission.html README.md
           git commit -m 'Restore symposium homepage and repair abstract submission link'
           git push
+
+# Triggered after initial workflow creation.
