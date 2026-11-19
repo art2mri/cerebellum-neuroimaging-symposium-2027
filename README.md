@@ -32,7 +32,7 @@ The website includes:
 - main symposium venue at IOU, University of Campinas
 - Travel & Accommodation recommendations
 - Steering Committee
-- confirmed sponsors FARA and AGI
+- confirmed sponsors FARA, AGI and NAF
 
 ## Repository structure
 
