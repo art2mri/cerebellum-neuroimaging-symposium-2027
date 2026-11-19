@@ -30,16 +30,8 @@ jobs:
           )
 
           if 'National Ataxia Foundation' not in text:
-              agi_card = '''      <article class="sponsor-card">
-        <div class="sponsor-logo-wrap"><img class="sponsor-logo" src="assets/agi.png" alt="Ataxia Global Initiative (AGI) logo"></div>
-        <h3>Ataxia Global Initiative</h3>
-      </article>
-'''
-              naf_card = '''      <article class="sponsor-card">
-        <div class="sponsor-logo-wrap"><img class="sponsor-logo" src="assets/naf.png" alt="National Ataxia Foundation (NAF) logo"></div>
-        <h3>National Ataxia Foundation</h3>
-      </article>
-'''
+              agi_card = '      <article class="sponsor-card">\n        <div class="sponsor-logo-wrap"><img class="sponsor-logo" src="assets/agi.png" alt="Ataxia Global Initiative (AGI) logo"></div>\n        <h3>Ataxia Global Initiative</h3>\n      </article>\n'
+              naf_card = '      <article class="sponsor-card">\n        <div class="sponsor-logo-wrap"><img class="sponsor-logo" src="assets/naf.png" alt="National Ataxia Foundation (NAF) logo"></div>\n        <h3>National Ataxia Foundation</h3>\n      </article>\n'
               if agi_card not in text:
                   raise SystemExit('AGI sponsor card not found')
               text = text.replace(agi_card, agi_card + naf_card)
