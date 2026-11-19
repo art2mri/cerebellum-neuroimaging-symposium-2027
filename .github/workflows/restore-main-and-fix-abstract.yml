@@ -1,0 +1,99 @@
+name: Restore symposium site and fix abstract page
+
+on:
+  push:
+    paths:
+      - '.github/workflows/restore-main-and-fix-abstract.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  restore:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository with history
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Restore the last correct symposium homepage
+        run: |
+          git show b305d525acdb135586d61c49e30153a1a7182aab:index.html > index.html
+
+      - name: Use stable abstract-submission page and repair redirect
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          stable = 'abstract-submission.html'
+          old_app = 'https://script.google.com/macros/s/AKfycbwlPE1hTAZfX9sOHoq4Z5oPZucKKnAcLwbAwYrkFljH81HnVh9vMc677I-AoZWqF3JHVg/exec'
+          app = old_app
+
+          index = Path('index.html')
+          text = index.read_text(encoding='utf-8')
+          text = text.replace(
+              f'href="{old_app}" target="_blank" rel="noopener noreferrer"',
+              f'href="{stable}"'
+          )
+          text = text.replace(
+              'Registration for the Cerebellum Neuroimaging Symposium 2027 is now open through Humanitix. Abstract submission will open separately.',
+              'Registration and abstract submission for the Cerebellum Neuroimaging Symposium 2027 are now open.'
+          )
+          index.write_text(text, encoding='utf-8')
+
+          redirect = f'''<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="refresh" content="0; url={app}">
+  <link rel="canonical" href="{app}">
+  <title>Abstract Submission · CNS2027</title>
+  <style>
+    :root {{ --ink:#14213d; --muted:#607080; --line:#dfe6ec; --primary:#0b7285; --soft:#f5f8fa; }}
+    * {{ box-sizing:border-box; }}
+    body {{ margin:0; min-height:100vh; display:grid; place-items:center; padding:24px; font-family:Arial,Helvetica,sans-serif; color:var(--ink); background:var(--soft); }}
+    main {{ width:min(100%,680px); padding:42px; background:#fff; border:1px solid var(--line); border-top:6px solid var(--primary); text-align:center; }}
+    h1 {{ margin:0 0 14px; font-family:Georgia,'Times New Roman',serif; font-size:38px; }}
+    p {{ color:var(--muted); line-height:1.6; }}
+    a {{ display:inline-flex; min-height:46px; align-items:center; justify-content:center; margin-top:12px; padding:0 20px; border-radius:3px; background:var(--primary); color:#fff; text-decoration:none; font-weight:700; }}
+  </style>
+  <script>window.location.replace('{app}');</script>
+</head>
+<body>
+  <main>
+    <h1>Abstract Submission</h1>
+    <p>You are being redirected to the secure CNS2027 abstract-submission form. No Google or Gmail account is required.</p>
+    <a href="{app}">Open the submission form →</a>
+  </main>
+</body>
+</html>
+'''
+          Path('abstract-submission.html').write_text(redirect, encoding='utf-8')
+
+          readme = Path('README.md')
+          r = readme.read_text(encoding='utf-8')
+          import re
+          r = re.sub(
+              r'https://script\.google\.com/macros/s/[^\s*]+/exec',
+              'https://art2mri.github.io/cerebellum-neuroimaging-symposium-2027/abstract-submission.html',
+              r
+          )
+          readme.write_text(r, encoding='utf-8')
+
+          if '<title>Cerebellum Neuroimaging Symposium 2027</title>' not in text:
+              raise SystemExit('Homepage restoration failed: expected symposium title not found.')
+          if 'CNS2027 Abstract Submission' in text:
+              raise SystemExit('Homepage restoration failed: submission-form title remains in index.html.')
+          if text.count('href="abstract-submission.html"') < 2:
+              raise SystemExit('Expected abstract links were not converted to the stable local page.')
+          PY
+
+      - name: Commit repaired pages
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add index.html abstract-submission.html README.md
+          git commit -m 'Restore symposium homepage and repair abstract submission link'
+          git push
