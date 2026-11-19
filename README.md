@@ -14,7 +14,7 @@ Registration is open through Humanitix:
 
 ## Abstract submission
 
-Abstract submissions are open until **January 31, 2027**:
+Abstract submissions are open until **January 15, 2027**:
 
 **https://art2mri.github.io/cerebellum-neuroimaging-symposium-2027/abstract-submission.html**
 
