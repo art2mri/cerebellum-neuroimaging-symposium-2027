@@ -53,6 +53,6 @@ jobs:
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add index.html README.md apps-script appsscript 2>/dev/null || true
+          git add -A
           git commit -m 'Change abstract submission deadline to January 15, 2027'
           git push
