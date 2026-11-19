@@ -1,10 +1,10 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <base target="_top">
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>CNS2027 Abstract Submission</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Cerebellum Neuroimaging Symposium 2027 — April 14–16, 2027 at the University of Campinas, Brazil." />
+  <title>Cerebellum Neuroimaging Symposium 2027</title>
   <style>
     :root {
       --ink: #14213d;
@@ -14,591 +14,656 @@
       --primary: #0b7285;
       --primary-dark: #075a69;
       --accent: #dff3f5;
-      --gold: #f0a202;
-      --danger: #b42318;
-      --danger-soft: #fff1f0;
-      --success: #087443;
-      --success-soft: #eaf8f1;
       --white: #fff;
-      --max: 980px;
+      --gold: #f0a202;
+      --max: 1180px;
     }
     * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
-      color: var(--ink);
-      background: var(--soft);
-      line-height: 1.5;
+    html { scroll-behavior: smooth; }
+    body { margin: 0; font-family: Arial, Helvetica, sans-serif; color: var(--ink); background: var(--white); line-height: 1.55; }
+    a { color: inherit; }
+    .container { width: min(calc(100% - 40px), var(--max)); margin: auto; }
+
+    header { position: sticky; top: 0; z-index: 20; background: rgba(255,255,255,.97); border-bottom: 1px solid var(--line); }
+    .nav-wrap { min-height: 74px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .brand { text-decoration: none; font-weight: 800; line-height: 1.05; letter-spacing: -.02em; flex: 0 0 auto; }
+    .brand small { display:block; color: var(--primary); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 3px; }
+    nav { display: flex; gap: 14px; align-items: center; }
+    nav a { text-decoration: none; font-size: 13px; font-weight: 700; white-space: nowrap; }
+    nav a:hover { color: var(--primary); }
+    .menu { display:none; border:0; background:none; font-size:25px; cursor:pointer; }
+
+    .hero { padding: 88px 0 76px; background: linear-gradient(135deg,#f8fcfd 0%,#ffffff 56%,#eaf7f8 100%); border-bottom: 1px solid var(--line); }
+    .hero-grid { display:grid; grid-template-columns: 1.35fr .8fr; gap: 74px; align-items:center; }
+    .eyebrow, .kicker { color: var(--primary); font-weight: 800; font-size: 12px; text-transform: uppercase; letter-spacing: .14em; margin:0 0 12px; }
+    h1 { font-family: Georgia, 'Times New Roman', serif; font-size: clamp(50px, 7vw, 82px); line-height: .94; letter-spacing: -.045em; margin:0 0 26px; font-weight: 700; }
+    h1 span { color: var(--primary); }
+    .lead { color: var(--muted); font-size: 19px; max-width: 690px; margin: 0 0 32px; }
+    .facts { display:flex; gap: 34px; flex-wrap:wrap; margin-bottom: 30px; }
+    .fact { display:flex; flex-direction:column; }
+    .fact strong { font-size:16px; }
+    .fact span { color:var(--muted); font-size:14px; }
+    .actions { display:flex; flex-wrap:wrap; gap:12px; }
+    .btn { display:inline-flex; min-height:46px; padding:0 18px; align-items:center; justify-content:center; text-decoration:none; font-weight:700; font-size:14px; border-radius:3px; }
+    .btn.primary { background: var(--primary); color:white; }
+    .btn.primary:hover { background:var(--primary-dark); }
+    .btn.secondary { border:1px solid var(--line); background:white; }
+    .btn.disabled { border:1px solid var(--line); background:#f1f4f6; color:#7c8995; cursor:default; }
+    .btn.interest { background:var(--gold); color:#14213d; border:1px solid var(--gold); box-shadow:0 8px 22px rgba(240,162,2,.22); }
+    .btn.interest:hover { background:#d99100; border-color:#d99100; }
+    .hero-card { background:white; border:1px solid var(--line); border-top:5px solid var(--primary); padding:26px; box-shadow:0 18px 45px rgba(20,33,61,.07); }
+    .hero-card h3 { margin:0 0 16px; font-size:17px; }
+    .hero-card ol { margin:0; padding-left:22px; }
+    .hero-card li { padding:7px 0; border-bottom:1px solid #edf2f5; }
+    .hero-card li:last-child { border-bottom:0; }
+
+    .interest-band { padding:26px 0; background:var(--ink); color:#fff; }
+    .interest-wrap { display:flex; align-items:center; justify-content:space-between; gap:28px; }
+    .interest-band .kicker { color:#9de2e7; margin-bottom:5px; }
+    .interest-band h2 { font-family:Georgia, 'Times New Roman', serif; font-size:clamp(25px,3vw,36px); margin:0 0 5px; letter-spacing:-.025em; }
+    .interest-band p { margin:0; color:#d8e1e8; }
+    .interest-band .btn { flex:0 0 auto; }
+
+    section { padding: 80px 0; }
+    .soft { background: var(--soft); }
+    .split { display:grid; grid-template-columns: 1fr 1fr; gap: 72px; }
+    h2 { font-family: Georgia, 'Times New Roman', serif; font-size: clamp(34px, 4.5vw, 52px); line-height: 1.05; letter-spacing: -.035em; margin:0; }
+    .copy { color: var(--muted); font-size: 17px; }
+    .copy p:first-child { margin-top:0; }
+    .heading { max-width: 860px; margin-bottom: 40px; }
+
+    .important-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+    .date-card { border:1px solid var(--line); background:#fff; padding:22px; min-height:155px; display:flex; flex-direction:column; }
+    .date-card .status { display:inline-flex; align-self:flex-start; padding:4px 8px; border-radius:999px; background:var(--accent); color:var(--primary-dark); font-size:10px; font-weight:800; letter-spacing:.07em; text-transform:uppercase; margin-bottom:14px; }
+    .date-card .status.open { background:#fff0c7; color:#875c00; }
+    .date-card strong { font-size:17px; margin-bottom:6px; }
+    .date-card span:last-child { color:var(--muted); font-size:14px; margin-top:auto; }
+
+    .speaker-grid { display:grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .speaker { background:#fff; border:1px solid var(--line); overflow:hidden; display:flex; flex-direction:column; }
+    .speaker-photo { width:100%; aspect-ratio: 4 / 4.2; object-fit: cover; object-position: center top; background:#eef3f6; }
+    .speaker-body { padding: 22px; display:flex; flex-direction:column; min-height: 210px; }
+    .speaker h3 { margin:0 0 7px; font-size:21px; line-height:1.16; }
+    .speaker p { margin:0 0 16px; color:var(--muted); font-size:14px; }
+    .speaker span { margin-top:auto; font-size:13px; color:var(--primary); font-weight:700; line-height:1.35; }
+
+    .tabs { display:grid; grid-template-columns:repeat(3,1fr); border:1px solid var(--line); margin-bottom:28px; }
+    .tab { border:0; border-right:1px solid var(--line); background:#fff; padding:18px; text-align:left; font:inherit; font-weight:800; cursor:pointer; }
+    .tab:last-child { border-right:0; }
+    .tab span { display:block; font-size:12px; font-weight:500; color:var(--muted); margin-top:2px; }
+    .tab.active { background:var(--primary); color:#fff; }
+    .tab.active span { color:rgba(255,255,255,.82); }
+    .program { display:none; }
+    .program.active { display:block; }
+    .program h3 { font-family:Georgia,serif; font-size:29px; margin:0 0 18px; }
+    .schedule { border-top:1px solid var(--line); }
+    .row { display:grid; grid-template-columns:140px 1fr; gap:18px; padding:16px 14px; border-bottom:1px solid var(--line); }
+    .row time { color:var(--primary); font-weight:700; font-size:14px; }
+    .row div { display:flex; flex-direction:column; }
+    .row strong { font-size:15px; }
+    .row span { color:var(--muted); font-size:14px; }
+    .row.featured { background:#edf7f8; }
+    .row.social { background:#fbf7ed; }
+
+    .coming-panel { border:1px solid var(--line); background:#fff; padding:30px; }
+    .coming-panel h3 { font-family:Georgia,serif; font-size:26px; margin:0 0 10px; }
+    .coming-panel p { color:var(--muted); margin:0 0 20px; }
+    .coming-panel .meta { display:block; color:var(--primary); font-size:11px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; margin-bottom:8px; }
+
+    .travel-intro { max-width:820px; color:var(--muted); font-size:17px; margin:16px 0 34px; }
+    .travel-subhead { font-family:Georgia,serif; font-size:30px; margin:42px 0 20px; letter-spacing:-.02em; }
+    .hotel-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
+    .hotel-card { border:1px solid var(--line); background:#fff; padding:24px; display:flex; flex-direction:column; min-height:290px; }
+    .hotel-card .hotel-tag { display:inline-flex; align-self:flex-start; padding:4px 8px; border-radius:999px; background:var(--accent); color:var(--primary-dark); font-size:10px; font-weight:800; letter-spacing:.07em; text-transform:uppercase; margin-bottom:16px; }
+    .hotel-card h3 { font-family:Georgia,serif; font-size:24px; line-height:1.08; margin:0 0 10px; }
+    .hotel-card p { color:var(--muted); font-size:14px; margin:0 0 12px; }
+    .hotel-card .hotel-address { font-size:13px; color:var(--ink); margin-top:auto; padding-top:12px; border-top:1px solid var(--line); }
+    .hotel-actions { display:flex; gap:8px; flex-wrap:wrap; margin-top:16px; }
+    .hotel-actions .btn { min-height:40px; padding:0 13px; font-size:12px; }
+    .transport-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:18px; }
+    .transport-card { border:1px solid var(--line); background:var(--soft); padding:24px; }
+    .transport-card .transport-label { display:block; color:var(--primary); font-size:11px; font-weight:800; letter-spacing:.1em; text-transform:uppercase; margin-bottom:8px; }
+    .transport-card h3 { font-size:19px; margin:0 0 8px; }
+    .transport-card p { color:var(--muted); font-size:14px; margin:0; }
+    .travel-note { margin-top:20px; color:var(--muted); font-size:13px; }
+
+    @media(max-width:980px){ .hotel-grid { grid-template-columns:1fr; } .transport-grid { grid-template-columns:1fr; } }
+
+    .workshop { background:var(--accent); }
+    .venue-grid { display:grid; grid-template-columns:1.15fr .85fr; gap:68px; align-items:center; }
+    .venue-card { border:1px solid var(--line); background:var(--soft); padding:30px; }
+    .venue-card strong { font-family:Georgia,serif; font-size:26px; }
+    .venue-card p { color:var(--muted); }
+    .venue-address { margin:18px 0 22px; padding-top:18px; border-top:1px solid var(--line); }
+    .venue-address b { display:block; color:var(--ink); margin-bottom:4px; }
+    .venue-map { margin-top:24px; border:1px solid var(--line); background:#fff; overflow:hidden; }
+    .venue-map iframe { width:100%; height:360px; border:0; display:block; }
+    .map-actions { display:flex; flex-wrap:wrap; gap:12px; margin-top:18px; }
+
+    .steering-grid { display:grid; grid-template-columns:repeat(5,1fr); gap:26px; align-items:start; }
+    .steering-member { text-align:center; padding:4px; }
+    .steering-photo { width:112px; height:112px; border-radius:50%; object-fit:cover; object-position:center top; display:block; margin:0 auto 14px; border:3px solid #fff; box-shadow:0 0 0 1px var(--line), 0 7px 18px rgba(20,33,61,.06); background:#eef3f6; }
+    .steering-member strong { display:block; font-size:15px; line-height:1.25; }
+    .role-tag { display:inline-block; margin-left:6px; padding:2px 6px; border-radius:999px; background:var(--accent); color:var(--primary-dark); font-size:9px; font-weight:800; letter-spacing:.06em; text-transform:uppercase; vertical-align:middle; }
+    .steering-member span:not(.role-tag) { display:block; color:var(--muted); font-size:12px; line-height:1.35; margin-top:6px; }
+
+    .sponsor-section { text-align:center; }
+    .sponsor-intro { color: var(--muted); font-size: 17px; max-width: 760px; margin: 18px auto 28px; }
+    .sponsor-grid { display:grid; grid-template-columns: repeat(2, minmax(260px, 1fr)); gap: 22px; max-width: 860px; margin: 0 auto; }
+    .sponsor-card { background:#fff; border:1px solid var(--line); padding:24px; display:flex; flex-direction:column; align-items:center; justify-content:center; }
+    .sponsor-logo-wrap { height: 140px; width: 100%; display:flex; align-items:center; justify-content:center; }
+    .sponsor-logo { max-width: 100%; max-height: 120px; object-fit: contain; }
+    .sponsor-card h3 { margin: 18px 0 0; font-size: 18px; line-height: 1.3; }
+    .sponsor-note { color: var(--muted); font-size: 14px; margin-top: 20px; }
+
+    footer { background:var(--ink); color:#fff; padding:34px 0; }
+    .footer-wrap { display:flex; justify-content:space-between; gap:28px; align-items:center; }
+    footer span { display:block; color:#c7d1db; font-size:13px; }
+    .footer-links { display:flex; gap:16px; flex-wrap:wrap; }
+    .footer-links a { text-decoration:none; font-size:13px; color:#d9e0e6; }
+
+    @media(max-width:1120px){
+      nav { display:none; position:absolute; top:74px; left:0; right:0; background:#fff; border-bottom:1px solid var(--line); padding:20px; flex-direction:column; align-items:flex-start; gap:16px; }
+      nav.open { display:flex; }
+      .menu { display:block; }
     }
-    a { color: var(--primary-dark); }
-    .container { width: min(calc(100% - 32px), var(--max)); margin: auto; }
-    header {
-      background: var(--white);
-      border-bottom: 1px solid var(--line);
-      padding: 18px 0;
+    @media(max-width:980px){
+      .speaker-grid { grid-template-columns: repeat(2,1fr); }
+      .steering-grid { grid-template-columns:repeat(3,1fr); }
+      .important-grid { grid-template-columns:repeat(2,1fr); }
+      .hero-grid, .split, .venue-grid { grid-template-columns:1fr; gap:42px; }
     }
-    .header-wrap { display: flex; justify-content: space-between; align-items: center; gap: 20px; }
-    .brand { text-decoration: none; color: var(--ink); font-weight: 800; line-height: 1.1; }
-    .brand small { display: block; color: var(--primary); font-size: 11px; text-transform: uppercase; letter-spacing: .12em; margin-bottom: 4px; }
-    .back { font-size: 14px; font-weight: 700; text-decoration: none; }
-    .hero { background: linear-gradient(135deg,#f8fcfd 0%,#ffffff 56%,#eaf7f8 100%); border-bottom: 1px solid var(--line); padding: 54px 0 46px; }
-    .eyebrow { color: var(--primary); font-weight: 800; font-size: 12px; text-transform: uppercase; letter-spacing: .14em; margin: 0 0 10px; }
-    h1 { font-family: Georgia, 'Times New Roman', serif; font-size: clamp(42px, 7vw, 66px); line-height: 1; letter-spacing: -.04em; margin: 0 0 18px; }
-    .lead { max-width: 780px; color: var(--muted); font-size: 18px; margin: 0 0 22px; }
-    .notice-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-    .notice { background: var(--white); border: 1px solid var(--line); border-left: 5px solid var(--primary); padding: 18px; font-size: 14px; }
-    .notice.scope { border-left-color: var(--gold); }
-    .notice strong { display: block; margin-bottom: 5px; font-size: 15px; }
-    main { padding: 40px 0 72px; }
-    form { display: grid; gap: 22px; }
-    fieldset { margin: 0; padding: 26px; border: 1px solid var(--line); background: var(--white); }
-    legend { padding: 0 8px; font-family: Georgia, 'Times New Roman', serif; font-weight: 700; font-size: 24px; }
-    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
-    .field { display: flex; flex-direction: column; gap: 7px; }
-    label, .label { font-weight: 700; font-size: 14px; }
-    .required::after { content: ' *'; color: var(--danger); }
-    input[type="text"], input[type="email"], select, textarea {
-      width: 100%;
-      border: 1px solid #b9c6d0;
-      border-radius: 3px;
-      background: #fff;
-      color: var(--ink);
-      font: inherit;
-      padding: 11px 12px;
+    @media(max-width:760px){
+      .tabs { grid-template-columns:1fr; }
+      .tab { border-right:0; border-bottom:1px solid var(--line); }
+      .tab:last-child { border-bottom:0; }
+      .steering-grid { grid-template-columns:repeat(2,1fr); gap:24px 16px; }
+      .row { grid-template-columns:1fr; gap:4px; }
+      .footer-wrap { flex-direction:column; align-items:flex-start; }
+      .interest-wrap { flex-direction:column; align-items:flex-start; }
+      .sponsor-grid { grid-template-columns:1fr; }
+      .important-grid { grid-template-columns:1fr; }
     }
-    input:focus, select:focus, textarea:focus {
-      outline: 3px solid rgba(11,114,133,.15);
-      border-color: var(--primary);
-    }
-    textarea { min-height: 145px; resize: vertical; }
-    .help, .section-note { color: var(--muted); font-size: 13px; margin: 0; }
-    .options { display: flex; flex-wrap: wrap; gap: 10px; }
-    .option {
-      display: flex;
-      align-items: flex-start;
-      gap: 8px;
-      padding: 11px 12px;
-      border: 1px solid var(--line);
-      background: var(--soft);
-      border-radius: 3px;
-      font-weight: 500;
-      cursor: pointer;
-    }
-    .option input { margin-top: 3px; }
-    .topic-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-    .author-list { display: grid; gap: 12px; margin-top: 16px; }
-    .author-row { display: grid; grid-template-columns: 42px 1fr 1.35fr auto; gap: 12px; align-items: end; padding-bottom: 12px; border-bottom: 1px solid #edf2f5; }
-    .author-row:last-child { border-bottom: 0; padding-bottom: 0; }
-    .author-number { width: 34px; height: 34px; display: grid; place-items: center; border-radius: 50%; background: var(--accent); color: var(--primary-dark); font-weight: 800; margin-bottom: 4px; }
-    .author-controls { display: flex; align-items: center; justify-content: space-between; gap: 14px; flex-wrap: wrap; margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--line); }
-    .author-count { color: var(--muted); font-size: 13px; font-weight: 700; }
-    .remove-author { min-height: 42px; padding: 0 13px; border: 1px solid #f1b7b2; background: #fff; color: var(--danger); border-radius: 3px; font: inherit; font-size: 12px; font-weight: 800; cursor: pointer; }
-    .remove-author:hover { background: var(--danger-soft); }
-    .remove-author[disabled] { visibility: hidden; pointer-events: none; }
-    .word-panel { display: flex; justify-content: space-between; gap: 16px; align-items: center; margin: 16px 0 18px; padding: 12px 14px; background: var(--accent); border: 1px solid #b8e2e5; }
-    .word-count { font-weight: 800; color: var(--primary-dark); white-space: nowrap; }
-    .word-count.over { color: var(--danger); }
-    .upload-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
-    .upload-box { padding: 18px; background: var(--soft); border: 1px solid var(--line); }
-    input[type="file"] { width: 100%; font: inherit; font-size: 13px; }
-    .consent { display: flex; align-items: flex-start; gap: 10px; padding: 18px; background: var(--white); border: 1px solid var(--line); }
-    .consent input { margin-top: 4px; }
-    .actions { display: flex; gap: 12px; justify-content: flex-end; flex-wrap: wrap; }
-    .btn {
-      min-height: 46px;
-      padding: 0 20px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 3px;
-      border: 1px solid var(--line);
-      background: var(--white);
-      color: var(--ink);
-      text-decoration: none;
-      font: inherit;
-      font-size: 14px;
-      font-weight: 800;
-      cursor: pointer;
-    }
-    .btn.primary { background: var(--primary); border-color: var(--primary); color: #fff; }
-    .btn.primary:hover { background: var(--primary-dark); }
-    .btn[disabled] { opacity: .58; cursor: wait; }
-    .error-summary { display: none; padding: 18px; background: var(--danger-soft); border: 1px solid #f2b8b5; color: #7a271a; }
-    .error-summary.show { display: block; }
-    .error-summary ul { margin-bottom: 0; }
-    .processing { display: none; align-items: center; gap: 10px; color: var(--muted); font-weight: 700; }
-    .processing.show { display: flex; }
-    .spinner { width: 18px; height: 18px; border: 3px solid #c9d5dd; border-top-color: var(--primary); border-radius: 50%; animation: spin .8s linear infinite; }
-    @keyframes spin { to { transform: rotate(360deg); } }
-    .success-card { display: none; background: var(--white); border: 1px solid #a9ddc4; border-top: 6px solid var(--success); padding: 34px; }
-    .success-card.show { display: block; }
-    .success-card h2 { font-family: Georgia, 'Times New Roman', serif; font-size: 36px; margin: 0 0 12px; }
-    .submission-id { display: inline-block; margin: 12px 0 18px; padding: 10px 14px; background: var(--success-soft); color: var(--success); font-size: 20px; font-weight: 800; letter-spacing: .05em; }
-    footer { background: var(--ink); color: #fff; padding: 30px 0; }
-    footer span { display: block; color: #c7d1db; font-size: 13px; }
-    .hidden { display: none !important; }
-    @media (max-width: 760px) {
-      .notice-grid, .grid-2, .topic-grid, .upload-grid { grid-template-columns: 1fr; }
-      .author-row { grid-template-columns: 36px 1fr auto; }
-      .author-row .affiliation { grid-column: 2 / 4; }
-      .remove-author { grid-column: 3; grid-row: 1; align-self: end; }
-      fieldset { padding: 20px; }
-      .header-wrap { align-items: flex-start; }
-      .actions { justify-content: stretch; }
-      .actions .btn { flex: 1 1 100%; }
+    @media(max-width:560px){
+      .container { width:min(calc(100% - 28px), var(--max)); }
+      .hero { padding:58px 0; }
+      section { padding:62px 0; }
+      .speaker-grid { grid-template-columns:1fr; }
     }
   </style>
 </head>
 <body>
 <header>
-  <div class="container header-wrap">
-    <a class="brand" href="https://art2mri.github.io/cerebellum-neuroimaging-symposium-2027/" target="_top">
-      <small>Campinas · Brazil</small>
-      Cerebellum Neuroimaging Symposium 2027
-    </a>
-    <a class="back" href="https://art2mri.github.io/cerebellum-neuroimaging-symposium-2027/" target="_top">Return to symposium site</a>
+  <div class="container nav-wrap">
+    <a class="brand" href="#home"><small>Campinas · Brazil</small>Cerebellum Neuroimaging<br>Symposium 2027</a>
+    <button class="menu" aria-label="Open menu" aria-expanded="false">☰</button>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#speakers">Speakers</a>
+      <a href="#program">Program</a>
+      <a href="#abstracts">Abstracts</a>
+      <a href="#registration">Registration</a>
+      <a href="#workshop">Workshop</a>
+      <a href="#venue">Venue</a>
+      <a href="#travel">Travel</a>
+      <a href="#sponsorship">Sponsors</a>
+    </nav>
   </div>
 </header>
 
-<section class="hero">
-  <div class="container">
-    <p class="eyebrow">Scientific contributions</p>
-    <h1>Abstract Submission</h1>
-    <p class="lead">Submit your work for consideration as an oral or poster presentation at the Cerebellum Neuroimaging Symposium 2027.</p>
-    <div class="notice-grid">
-      <div class="notice">
-        <strong>Submission deadline: January 31, 2027</strong>
-        Maximum 500 words, structured as Background, Methods, Results and Conclusions. References are not required. Up to two optional figures may be uploaded.
+<main>
+<section id="home" class="hero">
+  <div class="container hero-grid">
+    <div>
+      <p class="eyebrow">International Scientific Meeting</p>
+      <h1>Cerebellum<br><span>Neuroimaging</span><br>Symposium 2027</h1>
+      <p class="lead">Advancing cerebellar imaging from acquisition and quantitative analysis to biology, disease, clinical translation and trial-ready biomarkers.</p>
+      <div class="facts">
+        <div class="fact"><strong>April 14–16, 2027</strong><span>Wednesday–Friday</span></div>
+        <div class="fact"><strong>University of Campinas</strong><span>Campinas, Brazil</span></div>
       </div>
-      <div class="notice scope">
-        <strong>Scope and eligibility</strong>
-        Submissions may address any aspect of cerebellar neuroimaging methodology or its application in health or disease in humans. For preclinical applications, reviews, opinion pieces or conceptual frameworks, contact the organising committee before submitting.
+      <div class="actions">
+        <a class="btn interest" href="https://events.humanitix.com/cerebellum-neuroimaging-symposium-2027" target="_blank" rel="noopener noreferrer">Register now</a>
+        <a class="btn primary" href="abstract-submission.html">Submit abstract</a>
+        <a class="btn primary" href="#program">Preliminary program</a>
+        <a class="btn secondary" href="#speakers">Keynote speakers</a>
+      </div>
+    </div>
+    <aside class="hero-card">
+      <h3>Scientific focus</h3>
+      <ol>
+        <li>Novel imaging acquisition &amp; quantitative analysis</li>
+        <li>Normative lifespan imaging</li>
+        <li>Functional organization of the cerebellum</li>
+        <li>Neurodevelopmental, psychiatric &amp; non-ataxia neurological diseases</li>
+        <li>Cerebellar ataxia</li>
+        <li>Clinical-trial biomarkers &amp; clinical utility</li>
+      </ol>
+    </aside>
+  </div>
+</section>
+
+<section class="interest-band" aria-label="Registration">
+  <div class="container interest-wrap">
+    <div>
+      <p class="kicker">Registration now open</p>
+      <h2>Join us in Campinas in April 2027.</h2>
+      <p>Registration is now open for the Cerebellum Neuroimaging Symposium 2027.</p>
+    </div>
+    <a class="btn interest" href="https://events.humanitix.com/cerebellum-neuroimaging-symposium-2027" target="_blank" rel="noopener noreferrer">Register now →</a>
+  </div>
+</section>
+
+<section id="dates">
+  <div class="container">
+    <div class="heading">
+      <p class="kicker">Plan ahead</p>
+      <h2>Important Dates</h2>
+    </div>
+    <div class="important-grid">
+      <article class="date-card">
+        <span class="status open">Open now</span>
+        <strong>Registration</strong>
+        <span>Register for the symposium through the official Humanitix page.</span>
+      </article>
+      <article class="date-card">
+        <span class="status open">Open now</span>
+        <strong>Abstract Submission</strong>
+        <span>Submission deadline: January 31, 2027.</span>
+      </article>
+      <article class="date-card">
+        <span class="status">Save the date</span>
+        <strong>April 14–16, 2027</strong>
+        <span>Cerebellum Neuroimaging Symposium · Campinas, Brazil.</span>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="about" class="soft">
+  <div class="container split">
+    <div>
+      <p class="kicker">About</p>
+      <h2>A focused forum for the rapidly advancing field of cerebellar imaging.</h2>
+    </div>
+    <div class="copy">
+      <p>The Cerebellum Neuroimaging Symposium 2027 will bring together leading experts in neuroimaging, neurology and clinical research to advance understanding of cerebellar structure and function and to support the development and implementation of imaging biomarkers in neurological and rare diseases.</p>
+      <p>The meeting is designed for an intimate audience of approximately 100 participants, including internationally recognized researchers, clinician-scientists, early-career investigators, industry partners and non-profit organizations.</p>
+    </div>
+  </div>
+</section>
+
+<section id="speakers">
+  <div class="container">
+    <div class="heading">
+      <p class="kicker">Confirmed keynote speakers</p>
+      <h2>Six keynote speakers confirmed.</h2>
+    </div>
+    <div class="speaker-grid">
+      <article class="speaker">
+        <img class="speaker-photo" src="assets/wietske-van-der-zwaag.jpg" alt="Portrait of Wietske van der Zwaag">
+        <div class="speaker-body"><h3>Wietske van der Zwaag</h3><p>Netherlands Institute for Neuroscience</p><span>Ultra High-Field Cerebellum MRI</span></div>
+      </article>
+      <article class="speaker">
+        <img class="speaker-photo" src="assets/jorn-diedrichsen.jpg" alt="Portrait of Jörn Diedrichsen">
+        <div class="speaker-body"><h3>Jörn Diedrichsen</h3><p>Western University, Canada</p><span>Imaging the Cerebellum Across the Normative Lifespan</span></div>
+      </article>
+      <article class="speaker">
+        <img class="speaker-photo" src="assets/jessica-bernard.jpg" alt="Portrait of Jessica A. Bernard">
+        <div class="speaker-body"><h3>Jessica A. Bernard</h3><p>Texas A&amp;M University, USA</p><span>Cerebellar Functional Organisation</span></div>
+      </article>
+      <article class="speaker">
+        <img class="speaker-photo" src="assets/torgeir-moberget.jpg" alt="Portrait of Torgeir Moberget">
+        <div class="speaker-body"><h3>Torgeir Moberget</h3><p>University of Oslo, Norway</p><span>Neurodevelopmental, Psychiatric, and Neurological (non-ataxia) Diseases</span></div>
+      </article>
+      <article class="speaker">
+        <img class="speaker-photo" src="assets/marcondes-franca.jpg" alt="Portrait of Marcondes França">
+        <div class="speaker-body"><h3>Marcondes França</h3><p>University of Campinas, Brazil</p><span>Neuroimaging in Cerebellar Ataxias</span></div>
+      </article>
+      <article class="speaker">
+        <img class="speaker-photo" src="assets/gulin-oz.jpg" alt="Portrait of Gülin Öz">
+        <div class="speaker-body"><h3>Gülin Öz</h3><p>University of Minnesota, USA</p><span>Imaging Biomarkers for Clinical Trials</span></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="program" class="soft">
+  <div class="container">
+    <div class="heading">
+      <p class="kicker">Preliminary scientific program</p>
+      <h2>Three days from methodology to clinical translation.</h2>
+    </div>
+    <div class="tabs" role="tablist">
+      <button class="tab active" data-target="day1">Day 1<span>Novel Methodology &amp; Lifespan Imaging</span></button>
+      <button class="tab" data-target="day2">Day 2<span>Function &amp; Non-Ataxia Pathology</span></button>
+      <button class="tab" data-target="day3">Day 3<span>Ataxia &amp; Clinical Translation</span></button>
+    </div>
+
+    <div id="day1" class="program active">
+      <h3>Day 1 — Novel Methodology and Lifespan Imaging</h3>
+      <div class="schedule">
+        <div class="row"><time>08:30–09:00</time><div><strong>Registration</strong><span>Welcome coffee</span></div></div>
+        <div class="row"><time>09:00–09:10</time><div><strong>Opening Remarks</strong><span>Thiago Rezende &amp; Ian Harding</span></div></div>
+        <div class="row featured"><time>09:10–10:00</time><div><strong>Keynote 1</strong><span>Ultra High-Field Cerebellum MRI — Prof. Wietske van der Zwaag</span></div></div>
+        <div class="row"><time>10:00–10:20</time><div><strong>Break</strong><span>Coffee</span></div></div>
+        <div class="row"><time>10:20–11:40</time><div><strong>Session 1 — Selected Talks (×4)</strong><span>High-Field MRI · AI-based segmentation &amp; QC · Quantitative Harmonisation Strategies</span></div></div>
+        <div class="row"><time>11:40–12:00</time><div><strong>Discussion 1</strong><span>What is the future of cerebellum MRI?</span></div></div>
+        <div class="row"><time>12:00–13:30</time><div><strong>Lunch</strong><span>Poster Viewing</span></div></div>
+        <div class="row"><time>13:30–13:50</time><div><strong>Industry</strong><span>TBC</span></div></div>
+        <div class="row featured"><time>13:50–14:40</time><div><strong>Keynote 2</strong><span>Imaging the Cerebellum Across the Normative Lifespan — Prof. Jörn Diedrichsen</span></div></div>
+        <div class="row"><time>14:40–15:20</time><div><strong>Session 2.1 — Selected Talks (×2)</strong><span>Population-level cerebellar atlas · Normative modeling approaches · Development and aging trajectories</span></div></div>
+        <div class="row"><time>15:20–15:40</time><div><strong>Break</strong></div></div>
+        <div class="row"><time>15:40–16:20</time><div><strong>Session 2.2</strong><span>Selected Talks (×2), continued</span></div></div>
+        <div class="row"><time>16:20–16:40</time><div><strong>Discussion 2</strong><span>Does the cerebellum have a unique profile of development and aging relative to the rest of the brain?</span></div></div>
+      </div>
+    </div>
+
+    <div id="day2" class="program">
+      <h3>Day 2 — Cerebellar Functional Organisation and Pathology: Non-Ataxia</h3>
+      <div class="schedule">
+        <div class="row"><time>08:30–09:00</time><div><strong>Networking</strong><span>Coffee</span></div></div>
+        <div class="row"><time>09:00–09:10</time><div><strong>Industry</strong><span>TBC</span></div></div>
+        <div class="row featured"><time>09:10–10:00</time><div><strong>Keynote 3</strong><span>Cerebellar Functional Organisation — Prof. Jessica A. Bernard, Texas A&amp;M University</span></div></div>
+        <div class="row"><time>10:00–10:20</time><div><strong>Break</strong><span>Coffee</span></div></div>
+        <div class="row"><time>10:20–11:40</time><div><strong>Session 3 — Selected Talks (×4)</strong><span>Functional gradients and domain organization · Cerebellar connectivity · Cerebellar plasticity and learning</span></div></div>
+        <div class="row"><time>11:40–12:00</time><div><strong>Discussion 3</strong><span>What mysteries remain in understanding cerebellar functional anatomy?</span></div></div>
+        <div class="row"><time>12:00–13:30</time><div><strong>Lunch</strong><span>Poster Viewing</span></div></div>
+        <div class="row featured"><time>13:30–14:20</time><div><strong>Keynote 4</strong><span>Neurodevelopmental, Psychiatric, and Neurological (non-ataxia) Diseases — Prof. Torgeir Moberget</span></div></div>
+        <div class="row"><time>14:20–15:00</time><div><strong>Session 4.1 — Selected Talks (×2)</strong><span>Developmental disorders · Cerebellar cognitive affective syndromes · Inflammatory &amp; demyelinating diseases · Movement disorders</span></div></div>
+        <div class="row"><time>15:00–15:20</time><div><strong>Break</strong><span>Coffee</span></div></div>
+        <div class="row"><time>15:20–16:00</time><div><strong>Session 4.2</strong><span>Selected Talks (×2), continued</span></div></div>
+        <div class="row"><time>16:00–16:20</time><div><strong>Discussion 4</strong><span>Is cerebellum abnormality a key driver or an epiphenomenon in neurodevelopmental and psychiatric disorders?</span></div></div>
+        <div class="row social"><time>19:30–23:00</time><div><strong>Social Event</strong><span>Dinner</span></div></div>
+      </div>
+    </div>
+
+    <div id="day3" class="program">
+      <h3>Day 3 — Ataxia Imaging &amp; Clinical Translation</h3>
+      <div class="schedule">
+        <div class="row"><time>08:30–09:00</time><div><strong>Networking</strong><span>Coffee</span></div></div>
+        <div class="row"><time>09:00–09:10</time><div><strong>Industry</strong><span>TBC</span></div></div>
+        <div class="row featured"><time>09:10–10:00</time><div><strong>Keynote 5</strong><span>Neuroimaging in Cerebellar Ataxias — Prof. Marcondes França, University of Campinas</span></div></div>
+        <div class="row"><time>10:00–10:20</time><div><strong>Break</strong></div></div>
+        <div class="row"><time>10:20–11:40</time><div><strong>Session 5 — Selected Talks (×4)</strong><span>Acquired and genetic ataxias · MSA-C and idiopathic late-onset ataxias · Sensory and cerebellar ataxia · Imaging optimizing ataxia diagnosis</span></div></div>
+        <div class="row"><time>11:40–12:00</time><div><strong>Discussion 5</strong><span>What are the key barriers to achieving novel disease insights or greater sensitivity to disease expression/progression?</span></div></div>
+        <div class="row"><time>12:00–13:30</time><div><strong>Lunch</strong></div></div>
+        <div class="row featured"><time>13:30–14:20</time><div><strong>Keynote 6</strong><span>Imaging Biomarkers for Clinical Trials — Prof. Gülin Öz, University of Minnesota</span></div></div>
+        <div class="row"><time>14:20–15:20</time><div><strong>Session 6 — Selected Talks (×3)</strong><span>Regulatory considerations · Multisite trial harmonization · MRI endpoints for trials</span></div></div>
+        <div class="row"><time>15:20–15:40</time><div><strong>Break</strong></div></div>
+        <div class="row"><time>15:40–16:00</time><div><strong>Discussion 6</strong><span>Trial readiness roadmap: what have we learned so far? Global collaborations and data sharing initiatives (FARA/NAF/AGI/RAYNOR)</span></div></div>
+        <div class="row"><time>16:00–16:30</time><div><strong>Closing Plenary</strong><span>Thiago &amp; Ian</span></div></div>
       </div>
     </div>
   </div>
 </section>
 
-<main>
-  <div class="container">
-    <div id="errorSummary" class="error-summary" role="alert" aria-live="assertive"></div>
-
-    <form id="abstractForm" novalidate>
-      <input type="hidden" id="topicsJson" name="topicsJson" value="[]">
-      <input type="hidden" id="authorsJson" name="authorsJson" value="[]">
-      <input type="hidden" id="startedAt" name="startedAt" value="">
-      <input type="text" name="website" tabindex="-1" autocomplete="off" class="hidden" aria-hidden="true">
-
-      <fieldset>
-        <legend>1. Presenting author</legend>
-        <div class="grid-2">
-          <div class="field">
-            <label class="required" for="fullName">Full name</label>
-            <input id="fullName" name="fullName" type="text" autocomplete="name" maxlength="200" required>
-          </div>
-          <div class="field">
-            <label class="required" for="email">Email address</label>
-            <input id="email" name="email" type="email" autocomplete="email" maxlength="320" required>
-          </div>
-        </div>
-        <div class="field" style="margin-top:18px">
-          <label class="required" for="affiliation">Affiliation</label>
-          <input id="affiliation" name="affiliation" type="text" maxlength="500" required>
-        </div>
-        <div class="grid-2" style="margin-top:18px">
-          <div class="field">
-            <label class="required" for="careerStage">Career stage</label>
-            <select id="careerStage" name="careerStage" required>
-              <option value="">Select one</option>
-              <option>Student</option>
-              <option>Post-Doc (typically within 5 years of PhD)</option>
-              <option>Faculty</option>
-              <option>Industry Representative</option>
-              <option>Patient Advocacy Representative</option>
-              <option>Other</option>
-            </select>
-          </div>
-          <div class="field hidden" id="careerOtherWrap">
-            <label class="required" for="careerOther">Other career stage</label>
-            <input id="careerOther" name="careerOther" type="text" maxlength="200">
-          </div>
-        </div>
-      </fieldset>
-
-      <fieldset>
-        <legend>2. Presentation preference and topic</legend>
-        <div class="field">
-          <span class="label required">Should this abstract be considered for an oral presentation?</span>
-          <div class="options">
-            <label class="option"><input type="radio" name="oralPreference" value="Yes" required> Yes</label>
-            <label class="option"><input type="radio" name="oralPreference" value="No — poster only" required> No — poster only</label>
-          </div>
-        </div>
-        <div class="field" style="margin-top:22px">
-          <span class="label required">Broad topic area — select one or more</span>
-          <div class="topic-grid" id="topicGroup">
-            <label class="option"><input type="checkbox" value="Novel imaging acquisition &amp; quantitative analysis"> Novel imaging acquisition &amp; quantitative analysis</label>
-            <label class="option"><input type="checkbox" value="Normative lifespan imaging"> Normative lifespan imaging</label>
-            <label class="option"><input type="checkbox" value="Functional organization of the cerebellum"> Functional organization of the cerebellum</label>
-            <label class="option"><input type="checkbox" value="Neurodevelopmental, psychiatric &amp; non-ataxia neurological diseases"> Neurodevelopmental, psychiatric &amp; non-ataxia neurological diseases</label>
-            <label class="option"><input type="checkbox" value="Cerebellar ataxia"> Cerebellar ataxia</label>
-            <label class="option"><input type="checkbox" value="Clinical-trial biomarkers &amp; clinical utility"> Clinical-trial biomarkers &amp; clinical utility</label>
-          </div>
-        </div>
-      </fieldset>
-
-      <fieldset>
-        <legend>3. Title and authors</legend>
-        <div class="field">
-          <label class="required" for="title">Abstract title</label>
-          <input id="title" name="title" type="text" maxlength="500" required>
-        </div>
-        <p class="section-note" style="margin-top:20px">List one primary affiliation per author and mark the presenting author with an asterisk (*). Complete both fields for every author listed.</p>
-        <div class="author-list" id="authorList">
-          <div class="author-row" data-author-row>
-            <div class="author-number">1</div>
-            <div class="field"><label class="required" for="author1">Author name</label><input id="author1" type="text" maxlength="250" required></div>
-            <div class="field affiliation"><label class="required" for="authorAff1">Primary affiliation</label><input id="authorAff1" type="text" maxlength="500" required></div>
-            <button class="remove-author" type="button" aria-label="Remove author 1" disabled>Remove</button>
-          </div>
-        </div>
-        <div class="author-controls">
-          <button id="addAuthorButton" class="btn" type="button">+ Add author</button>
-          <span id="authorCount" class="author-count" aria-live="polite">1 author</span>
-        </div>
-      </fieldset>
-
-      <fieldset>
-        <legend>4. Abstract</legend>
-        <p class="section-note">Maximum 500 words in total. References are not required.</p>
-        <div class="word-panel">
-          <span>Combined word count for all four sections</span>
-          <span id="wordCount" class="word-count">0 / 500 words</span>
-        </div>
-        <div class="field">
-          <label class="required" for="background">Background</label>
-          <textarea class="abstract-part" id="background" name="background" required></textarea>
-        </div>
-        <div class="field" style="margin-top:18px">
-          <label class="required" for="methods">Methods</label>
-          <textarea class="abstract-part" id="methods" name="methods" required></textarea>
-        </div>
-        <div class="field" style="margin-top:18px">
-          <label class="required" for="results">Results</label>
-          <textarea class="abstract-part" id="results" name="results" required></textarea>
-        </div>
-        <div class="field" style="margin-top:18px">
-          <label class="required" for="conclusions">Conclusions</label>
-          <textarea class="abstract-part" id="conclusions" name="conclusions" required></textarea>
-        </div>
-      </fieldset>
-
-      <fieldset>
-        <legend>5. Figures — optional</legend>
-        <p class="section-note">Upload up to two figures, each with a short caption. No Google or Gmail account is required. Accepted formats: PNG, JPG/JPEG and TIFF. Maximum 5 MB per figure and 10 MB combined.</p>
-        <div class="upload-grid" style="margin-top:18px">
-          <div class="upload-box">
-            <div class="field">
-              <label for="figure1">Figure 1</label>
-              <input id="figure1" name="figure1" type="file" accept=".png,.jpg,.jpeg,.tif,.tiff,image/png,image/jpeg,image/tiff">
-            </div>
-            <div class="field" style="margin-top:14px">
-              <label for="caption1">Figure 1 caption</label>
-              <textarea id="caption1" name="caption1" maxlength="2000" style="min-height:95px"></textarea>
-            </div>
-          </div>
-          <div class="upload-box">
-            <div class="field">
-              <label for="figure2">Figure 2</label>
-              <input id="figure2" name="figure2" type="file" accept=".png,.jpg,.jpeg,.tif,.tiff,image/png,image/jpeg,image/tiff">
-            </div>
-            <div class="field" style="margin-top:14px">
-              <label for="caption2">Figure 2 caption</label>
-              <textarea id="caption2" name="caption2" maxlength="2000" style="min-height:95px"></textarea>
-            </div>
-          </div>
-        </div>
-      </fieldset>
-
-      <label class="consent">
-        <input id="confirmation" type="checkbox" required>
-        <span>I confirm that the information is accurate, that all listed authors have approved the submission, and that the presenting author may be contacted by the organising committee.</span>
-      </label>
-
-      <div id="processing" class="processing" role="status" aria-live="polite"><span class="spinner"></span> Saving the abstract and figures securely…</div>
-      <div class="actions">
-        <a class="btn" href="https://art2mri.github.io/cerebellum-neuroimaging-symposium-2027/" target="_top">Cancel and return</a>
-        <button id="submitButton" class="btn primary" type="submit">Submit abstract →</button>
-      </div>
-    </form>
-
-    <section id="successCard" class="success-card" aria-live="polite">
-      <p class="eyebrow">Submission received</p>
-      <h2>Thank you for your submission.</h2>
-      <p>Your abstract has been saved in the symposium administration system. Please keep the identifier below for future correspondence.</p>
-      <div id="submissionId" class="submission-id"></div>
-      <p id="emailStatus"></p>
-      <div class="actions" style="justify-content:flex-start;margin-top:20px">
-        <a class="btn primary" href="https://art2mri.github.io/cerebellum-neuroimaging-symposium-2027/" target="_top">Return to symposium site</a>
-      </div>
-    </section>
+<section id="abstracts">
+  <div class="container split">
+    <div>
+      <p class="kicker">Scientific contributions</p>
+      <h2>Abstract Submission</h2>
+    </div>
+    <div class="coming-panel">
+      <span class="meta">Submissions open</span>
+      <h3>Submit your abstract by January 31, 2027.</h3>
+      <p>Abstracts may address any aspect of cerebellar neuroimaging methodology or its application in health or disease. Submissions are limited to 500 words, structured as Background, Methods, Results and Conclusions, and may include up to two optional figures.</p>
+      <p><strong>No Google or Gmail account is required.</strong></p>
+      <a class="btn primary" href="abstract-submission.html">Submit abstract →</a>
+    </div>
   </div>
+</section>
+
+<section id="registration" class="soft">
+  <div class="container split">
+    <div>
+      <p class="kicker">Join us in Campinas</p>
+      <h2>Registration</h2>
+    </div>
+    <div class="coming-panel">
+      <span class="meta">Registration open</span>
+      <h3>Reserve your place for the symposium.</h3>
+      <p>Registration for the Cerebellum Neuroimaging Symposium 2027 is now available through Humanitix. Visit the official registration page for ticket options and current event information.</p>
+      <a class="btn interest" href="https://events.humanitix.com/cerebellum-neuroimaging-symposium-2027" target="_blank" rel="noopener noreferrer">Register now →</a>
+    </div>
+  </div>
+</section>
+
+<section id="workshop" class="workshop">
+  <div class="container">
+    <div class="split">
+      <div>
+        <p class="kicker">Pre-symposium training</p>
+        <h2>Hands-on cerebellar MRI workshop</h2>
+      </div>
+      <div class="copy">
+        <p>A pre-symposium hands-on course will focus on MRI acquisition and processing and is designed especially for early-career researchers.</p>
+        <p>The workshop will take place at the <strong>Hospital de Clínicas da UNICAMP (HC)</strong>, on the University of Campinas campus.</p>
+        <div class="venue-address copy">
+          <b>Hospital de Clínicas da UNICAMP (HC)</b>
+          Rua Vital Brasil, 251<br>
+          Cidade Universitária · Campinas, São Paulo<br>
+          13083-888 · Brazil
+        </div>
+        <div class="map-actions">
+          <a class="btn primary" href="https://share.google/H8udi9lEeJgjZzazJ" target="_blank" rel="noopener noreferrer">Open in Google Maps</a>
+        </div>
+        <p><strong>Workshop format and registration details will be announced.</strong></p>
+      </div>
+    </div>
+    <div class="venue-map" aria-label="Map showing Hospital de Clínicas da UNICAMP">
+      <iframe
+        title="Hospital de Clínicas da UNICAMP — hands-on MRI workshop venue"
+        src="https://www.google.com/maps?q=Hospital%20de%20Cl%C3%ADnicas%20da%20UNICAMP%2C%20Rua%20Vital%20Brasil%2C%20251%2C%20Campinas%2C%20SP%2C%20Brazil&output=embed"
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        allowfullscreen>
+      </iframe>
+    </div>
+  </div>
+</section>
+
+<section id="venue" class="soft">
+  <div class="container">
+    <div class="venue-grid">
+      <div>
+        <p class="kicker">Main symposium venue</p>
+        <h2>IOU · University of Campinas<br>Campinas, Brazil</h2>
+        <p class="copy">The symposium will take place at the <strong>Institute of Otorhinolaryngology &amp; Head and Neck Surgery (IOU)</strong>, located on the main campus of the University of Campinas (UNICAMP) in Barão Geraldo.</p>
+        <div class="venue-address copy">
+          <b>Institute of Otorhinolaryngology &amp; Head and Neck Surgery (IOU)</b>
+          Av. Prefeito José Roberto Magalhães Teixeira, 150<br>
+          Cidade Universitária Zeferino Vaz · Barão Geraldo<br>
+          Campinas, São Paulo · Brazil
+        </div>
+        <div class="map-actions">
+          <a class="btn primary" href="https://share.google/s0RZWVNVZjExSSIXS" target="_blank" rel="noopener noreferrer">Open in Google Maps</a>
+        </div>
+      </div>
+      <div class="venue-card">
+        <strong>IOU · UNICAMP</strong>
+        <p>April 14–16, 2027</p>
+        <p>Main symposium venue</p>
+        <p>Barão Geraldo · Campinas, São Paulo</p>
+      </div>
+    </div>
+    <div class="venue-map" aria-label="Map showing the IOU venue at UNICAMP">
+      <iframe
+        title="IOU at University of Campinas — symposium venue"
+        src="https://www.google.com/maps?q=Instituto%20de%20Otorrinolaringologia%20%26%20Cirurgia%20de%20Cabe%C3%A7a%20e%20Pesco%C3%A7o%20IOU%20UNICAMP%2C%20Av.%20Prefeito%20Jos%C3%A9%20Roberto%20Magalh%C3%A3es%20Teixeira%2C%20150%2C%20Campinas%2C%20SP%2C%20Brazil&output=embed"
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        allowfullscreen>
+      </iframe>
+    </div>
+  </div>
+</section>
+
+<section id="travel">
+  <div class="container">
+    <p class="kicker">Getting to Campinas</p>
+    <h2>Travel &amp; Accommodation</h2>
+    <p class="travel-intro">The symposium will be held on the University of Campinas (UNICAMP) campus in Barão Geraldo. The accommodations below are suggested options for participants; room blocks or special symposium rates, if available, will be announced separately.</p>
+
+    <h3 class="travel-subhead">Suggested accommodations</h3>
+    <div class="hotel-grid">
+      <article class="hotel-card">
+        <span class="hotel-tag">On campus</span>
+        <h3>Casa do Professor Visitante (CPV)</h3>
+        <p>Located inside the UNICAMP campus, CPV is the most convenient option for participants who prefer to stay close to the symposium activities.</p>
+        <div class="hotel-address">Av. Érico Veríssimo, 1251 · Barão Geraldo · Campinas, SP · 13083-851</div>
+        <div class="hotel-actions">
+          <a class="btn primary" href="https://www.funcamp.unicamp.br/cpv/" target="_blank" rel="noopener noreferrer">Hotel website</a>
+          <a class="btn secondary" href="https://www.google.com/maps/search/?api=1&query=Casa+do+Professor+Visitante+UNICAMP" target="_blank" rel="noopener noreferrer">Google Maps</a>
+        </div>
+      </article>
+
+      <article class="hotel-card">
+        <span class="hotel-tag">Barão Geraldo</span>
+        <h3>Matiz Barão Geraldo Express Hotel</h3>
+        <p>A practical option in Barão Geraldo, approximately 2 km from UNICAMP, with easy access to the campus and local restaurants and services.</p>
+        <div class="hotel-address">Av. Albino José Barbosa de Oliveira, 1700 · Barão Geraldo · Campinas, SP</div>
+        <div class="hotel-actions">
+          <a class="btn primary" href="https://book.omnibees.com/chain/2250/hotel/1265?currencyId=16&lang=pt-BR" target="_blank" rel="noopener noreferrer">Hotel website</a>
+          <a class="btn secondary" href="https://www.google.com/maps/search/?api=1&query=Matiz+Bar%C3%A3o+Geraldo+Express+Hotel+Campinas" target="_blank" rel="noopener noreferrer">Google Maps</a>
+        </div>
+      </article>
+
+      <article class="hotel-card">
+        <span class="hotel-tag">Campinas</span>
+        <h3>Rio Hotel by Bourbon Campinas</h3>
+        <p>A comfortable hotel in Jardim Santa Genebra, near Parque D. Pedro, with convenient road access to UNICAMP and Viracopos Airport.</p>
+        <div class="hotel-address">R. Estácio de Sá, 2136 · Jardim Santa Genebra · Campinas, SP · 13080-010</div>
+        <div class="hotel-actions">
+          <a class="btn primary" href="https://www.bourbon.com.br/hoteis-e-resorts/rio-hotel-by-bourbon-campinas" target="_blank" rel="noopener noreferrer">Hotel website</a>
+          <a class="btn secondary" href="https://www.google.com/maps/search/?api=1&query=Rio+Hotel+by+Bourbon+Campinas" target="_blank" rel="noopener noreferrer">Google Maps</a>
+        </div>
+      </article>
+    </div>
+
+    <h3 class="travel-subhead">Transportation</h3>
+    <div class="transport-grid">
+      <article class="transport-card">
+        <span class="transport-label">Recommended airport</span>
+        <h3>Viracopos International Airport (VCP)</h3>
+        <p>Viracopos is the most convenient airport for Campinas. Taxis and app-based ride services are available at the airport and are the simplest option for reaching Barão Geraldo and UNICAMP.</p>
+      </article>
+      <article class="transport-card">
+        <span class="transport-label">International connections</span>
+        <h3>São Paulo–Guarulhos Airport (GRU)</h3>
+        <p>GRU offers a wider range of international flights. Direct intercity coach services connect GRU with Campinas; from the Campinas Bus Station, participants can continue to Barão Geraldo by taxi, app-based ride or local bus.</p>
+      </article>
+      <article class="transport-card">
+        <span class="transport-label">Public transport</span>
+        <h3>Campinas to UNICAMP</h3>
+        <p>Public bus connections serve UNICAMP from central Campinas and the Campinas Bus Station. Current routes and timetables should be checked shortly before travel.</p>
+      </article>
+      <article class="transport-card">
+        <span class="transport-label">On campus</span>
+        <h3>UNICAMP Internal Shuttle</h3>
+        <p>UNICAMP operates free internal shuttle buses connecting major points across the campus. No registration is required; routes and real-time information are available through the university mobility services.</p>
+      </article>
+    </div>
+    <div class="hotel-actions" style="margin-top:22px">
+      <a class="btn primary" href="https://www.prefeitura.unicamp.br/produto/circular-interno/" target="_blank" rel="noopener noreferrer">UNICAMP internal transport</a>
+      <a class="btn secondary" href="https://portal.ifi.unicamp.br/a-instituicao/como-chegar" target="_blank" rel="noopener noreferrer">How to reach UNICAMP</a>
+      <a class="btn secondary" href="https://www.viracopos.com/pt_br/" target="_blank" rel="noopener noreferrer">Viracopos Airport</a>
+    </div>
+    <p class="travel-note">Additional transportation arrangements for symposium participants, if offered, will be announced closer to the meeting.</p>
+  </div>
+</section>
+
+<section id="committee">
+  <div class="container">
+    <div class="heading">
+      <p class="kicker">Scientific leadership</p>
+      <h2>Steering Committee</h2>
+    </div>
+    <div class="steering-grid">
+      <article class="steering-member">
+        <img class="steering-photo" src="assets/thiago-rezende.jpg" alt="Portrait of Thiago Junqueira Ribeiro de Rezende">
+        <strong>Thiago Junqueira Ribeiro de Rezende <span class="role-tag">Co-Chair</span></strong>
+        <span>University of São Paulo &amp; University of Campinas, Brazil</span>
+      </article>
+      <article class="steering-member">
+        <img class="steering-photo" src="assets/ian-harding.jpg" alt="Portrait of Ian H. Harding">
+        <strong>Ian H. Harding <span class="role-tag">Co-Chair</span></strong>
+        <span>Queensland Institute of Medical Research, Australia</span>
+      </article>
+      <article class="steering-member">
+        <img class="steering-photo" src="assets/marcondes-franca.jpg" alt="Portrait of Marcondes Cavalcante França Jr">
+        <strong>Marcondes Cavalcante França Jr</strong>
+        <span>University of Campinas, Brazil</span>
+      </article>
+      <article class="steering-member">
+        <img class="steering-photo" src="assets/pierre-gilles-henry.jpg" alt="Portrait of Pierre-Gilles Henry">
+        <strong>Pierre-Gilles Henry</strong>
+        <span>University of Minnesota, USA</span>
+      </article>
+      <article class="steering-member">
+        <img class="steering-photo" src="assets/sheeba-anteraper.jpg" alt="Portrait of Sheeba Anteraper">
+        <strong>Sheeba Anteraper</strong>
+        <span>UT Southwestern, USA</span>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="sponsorship" class="soft">
+  <div class="container sponsor-section">
+    <p class="kicker">Sponsors &amp; partners</p>
+    <h2>Confirmed sponsors</h2>
+    <p class="sponsor-intro">We gratefully acknowledge the organizations supporting the Cerebellum Neuroimaging Symposium 2027.</p>
+    <div class="sponsor-grid">
+      <article class="sponsor-card">
+        <div class="sponsor-logo-wrap"><img class="sponsor-logo" src="assets/fara.png" alt="Friedreich's Ataxia Research Alliance (FARA) logo"></div>
+        <h3>Friedreich's Ataxia Research Alliance</h3>
+      </article>
+      <article class="sponsor-card">
+        <div class="sponsor-logo-wrap"><img class="sponsor-logo" src="assets/agi.png" alt="Ataxia Global Initiative (AGI) logo"></div>
+        <h3>Ataxia Global Initiative</h3>
+      </article>
+    </div>
+    <p class="sponsor-note">Additional sponsorship and partnership opportunities remain available.</p>
+  </div>
+</section>
+
+<section id="updates">
+  <div class="container split">
+    <div>
+      <p class="kicker">Registration open</p>
+      <h2>Reserve your place in Campinas.</h2>
+    </div>
+    <div class="copy">
+      <p>Registration and abstract submission for the Cerebellum Neuroimaging Symposium 2027 are now open.</p>
+      <a class="btn interest" href="https://events.humanitix.com/cerebellum-neuroimaging-symposium-2027" target="_blank" rel="noopener noreferrer">Register now →</a>
+    </div>
+  </div>
+</section>
+
+
 </main>
 
 <footer>
-  <div class="container">
-    <strong>Cerebellum Neuroimaging Symposium 2027</strong>
-    <span>April 14–16, 2027 · University of Campinas · Brazil</span>
+  <div class="container footer-wrap">
+    <div><strong>Cerebellum Neuroimaging Symposium 2027</strong><span>April 14–16, 2027 · Campinas, Brazil</span></div>
+    <div class="footer-links">
+      <a href="#speakers">Speakers</a>
+      <a href="#program">Program</a>
+      <a href="#abstracts">Abstracts</a>
+      <a href="#registration">Registration</a>
+      <a href="#venue">Venue</a>
+      <a href="#travel">Travel</a>
+    </div>
   </div>
 </footer>
 
 <script>
-(() => {
-  const MAX_WORDS = 500;
-  let MAX_AUTHORS = 30;
-  const MAX_EACH = 5 * 1024 * 1024;
-  const MAX_TOTAL = 10 * 1024 * 1024;
-  const ALLOWED_EXTENSIONS = ['png', 'jpg', 'jpeg', 'tif', 'tiff'];
-
-  const form = document.getElementById('abstractForm');
-  const submitButton = document.getElementById('submitButton');
-  const processing = document.getElementById('processing');
-  const errorSummary = document.getElementById('errorSummary');
-  const successCard = document.getElementById('successCard');
-  const wordCounter = document.getElementById('wordCount');
-  const abstractParts = [...document.querySelectorAll('.abstract-part')];
-  const careerStage = document.getElementById('careerStage');
-  const careerOtherWrap = document.getElementById('careerOtherWrap');
-  const careerOther = document.getElementById('careerOther');
-  const fullName = document.getElementById('fullName');
-  const affiliation = document.getElementById('affiliation');
-  const authorList = document.getElementById('authorList');
-  const addAuthorButton = document.getElementById('addAuthorButton');
-  const authorCount = document.getElementById('authorCount');
-  const fileInputs = [document.getElementById('figure1'), document.getElementById('figure2')];
-
-  document.getElementById('startedAt').value = String(Date.now());
-
-  function countWords() {
-    const text = abstractParts.map(el => el.value.trim()).filter(Boolean).join(' ');
-    return text ? text.split(/\s+/).filter(Boolean).length : 0;
-  }
-
-  function updateWordCount() {
-    const count = countWords();
-    wordCounter.textContent = `${count} / ${MAX_WORDS} words`;
-    wordCounter.classList.toggle('over', count > MAX_WORDS);
-    return count;
-  }
-
-  abstractParts.forEach(el => el.addEventListener('input', updateWordCount));
-
-  careerStage.addEventListener('change', () => {
-    const show = careerStage.value === 'Other';
-    careerOtherWrap.classList.toggle('hidden', !show);
-    careerOther.required = show;
-    if (!show) careerOther.value = '';
-  });
-
-  function getFirstAuthorInputs() {
-    const firstRow = authorList.querySelector('[data-author-row]');
-    const inputs = firstRow ? firstRow.querySelectorAll('input') : [];
-    return { name: inputs[0] || null, affiliation: inputs[1] || null };
-  }
-
-  function syncPresentingAuthor() {
-    const first = getFirstAuthorInputs();
-    if (first.name && !first.name.value.trim() && fullName.value.trim()) {
-      first.name.value = fullName.value.trim() + '*';
-    }
-    if (first.affiliation && !first.affiliation.value.trim() && affiliation.value.trim()) {
-      first.affiliation.value = affiliation.value.trim();
-    }
-  }
-  fullName.addEventListener('blur', syncPresentingAuthor);
-  affiliation.addEventListener('blur', syncPresentingAuthor);
-
-  function createAuthorRow(index) {
-    const row = document.createElement('div');
-    row.className = 'author-row';
-    row.setAttribute('data-author-row', '');
-    row.innerHTML = `
-      <div class="author-number">${index}</div>
-      <div class="field">
-        <label for="author${index}">Author name</label>
-        <input id="author${index}" type="text" maxlength="250">
-      </div>
-      <div class="field affiliation">
-        <label for="authorAff${index}">Primary affiliation</label>
-        <input id="authorAff${index}" type="text" maxlength="500">
-      </div>
-      <button class="remove-author" type="button" aria-label="Remove author ${index}">Remove</button>`;
-    row.querySelector('.remove-author').addEventListener('click', () => {
-      row.remove();
-      renumberAuthors();
-    });
-    return row;
-  }
-
-  function renumberAuthors() {
-    const rows = [...authorList.querySelectorAll('[data-author-row]')];
-    rows.forEach((row, offset) => {
-      const index = offset + 1;
-      const inputs = row.querySelectorAll('input');
-      const labels = row.querySelectorAll('label');
-      const removeButton = row.querySelector('.remove-author');
-      row.querySelector('.author-number').textContent = String(index);
-      inputs[0].id = `author${index}`;
-      inputs[1].id = `authorAff${index}`;
-      labels[0].htmlFor = inputs[0].id;
-      labels[1].htmlFor = inputs[1].id;
-      labels[0].classList.toggle('required', index === 1);
-      labels[1].classList.toggle('required', index === 1);
-      inputs[0].required = index === 1;
-      inputs[1].required = index === 1;
-      removeButton.disabled = index === 1;
-      removeButton.setAttribute('aria-label', `Remove author ${index}`);
-    });
-    authorCount.textContent = `${rows.length} ${rows.length === 1 ? 'author' : 'authors'} · maximum ${MAX_AUTHORS}`;
-    addAuthorButton.disabled = rows.length >= MAX_AUTHORS;
-    addAuthorButton.textContent = rows.length >= MAX_AUTHORS ? 'Maximum reached' : '+ Add author';
-  }
-
-  addAuthorButton.addEventListener('click', () => {
-    const currentCount = authorList.querySelectorAll('[data-author-row]').length;
-    if (currentCount >= MAX_AUTHORS) return;
-    const newRow = createAuthorRow(currentCount + 1);
-    authorList.appendChild(newRow);
-    renumberAuthors();
-    newRow.querySelector('input').focus();
-  });
-
-  google.script.run
-    .withSuccessHandler(config => {
-      const configured = Number(config && config.maxAuthors);
-      if (Number.isFinite(configured) && configured > 0) {
-        MAX_AUTHORS = Math.floor(configured);
-        renumberAuthors();
-      }
-    })
-    .withFailureHandler(() => renumberAuthors())
-    .getPublicConfig();
-
-  function collectAuthors() {
-    return [...document.querySelectorAll('[data-author-row]')].map(row => {
-      const inputs = row.querySelectorAll('input');
-      return { name: inputs[0].value.trim(), affiliation: inputs[1].value.trim() };
-    }).filter(author => author.name || author.affiliation);
-  }
-
-  function collectTopics() {
-    return [...document.querySelectorAll('#topicGroup input:checked')].map(input => input.value);
-  }
-
-  function fileExtension(name) {
-    const match = String(name || '').toLowerCase().match(/\.([a-z0-9]+)$/);
-    return match ? match[1] : '';
-  }
-
-  function validateForm() {
-    const errors = [];
-    syncPresentingAuthor();
-
-    if (!form.checkValidity()) {
-      errors.push('Complete all required fields marked with an asterisk.');
-    }
-
-    const topics = collectTopics();
-    if (!topics.length) errors.push('Select at least one broad topic area.');
-
-    const authors = collectAuthors();
-    if (!authors.length) {
-      errors.push('Enter at least one author and primary affiliation.');
-    }
-    if (authors.length > MAX_AUTHORS) {
-      errors.push(`A maximum of ${MAX_AUTHORS} authors can be entered.`);
-    }
-    authors.forEach((author, index) => {
-      if (!author.name || !author.affiliation) {
-        errors.push(`Complete both fields for author ${index + 1}.`);
-      }
-    });
-
-    const words = updateWordCount();
-    if (words > MAX_WORDS) errors.push(`The abstract contains ${words} words; the maximum is ${MAX_WORDS}.`);
-
-    let totalBytes = 0;
-    fileInputs.forEach((input, index) => {
-      if (!input.files.length) return;
-      const file = input.files[0];
-      totalBytes += file.size;
-      if (!ALLOWED_EXTENSIONS.includes(fileExtension(file.name))) {
-        errors.push(`Figure ${index + 1} must be PNG, JPG/JPEG or TIFF.`);
-      }
-      if (file.size > MAX_EACH) errors.push(`Figure ${index + 1} exceeds the 5 MB limit.`);
-      const caption = document.getElementById(`caption${index + 1}`).value.trim();
-      if (!caption) errors.push(`Add a short caption for Figure ${index + 1}.`);
-    });
-    if (totalBytes > MAX_TOTAL) errors.push('The two figures together exceed the 10 MB combined limit.');
-
-    document.getElementById('topicsJson').value = JSON.stringify(topics);
-    document.getElementById('authorsJson').value = JSON.stringify(authors);
-    return errors;
-  }
-
-  function showErrors(errors) {
-    errorSummary.innerHTML = `<strong>Please correct the following:</strong><ul>${errors.map(error => `<li>${escapeHtml(error)}</li>`).join('')}</ul>`;
-    errorSummary.classList.add('show');
-    errorSummary.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }
-
-  function escapeHtml(text) {
-    const div = document.createElement('div');
-    div.textContent = text;
-    return div.innerHTML;
-  }
-
-  function setBusy(busy) {
-    submitButton.disabled = busy;
-    processing.classList.toggle('show', busy);
-  }
-
-  form.addEventListener('submit', event => {
-    event.preventDefault();
-    errorSummary.classList.remove('show');
-    const errors = validateForm();
-    if (errors.length) {
-      showErrors(errors);
-      return;
-    }
-
-    setBusy(true);
-    google.script.run
-      .withSuccessHandler(result => {
-        setBusy(false);
-        if (!result || !result.ok) {
-          showErrors(['The submission could not be completed. Please try again.']);
-          return;
-        }
-        form.classList.add('hidden');
-        errorSummary.classList.remove('show');
-        document.getElementById('submissionId').textContent = result.submissionId;
-        document.getElementById('emailStatus').textContent = result.submitterEmailSent
-          ? 'A confirmation email has been sent to the presenting author.'
-          : 'The submission was saved successfully, but the confirmation email could not be sent. Please retain this submission ID.';
-        successCard.classList.add('show');
-        successCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      })
-      .withFailureHandler(error => {
-        setBusy(false);
-        const message = error && error.message ? error.message : 'The submission could not be completed. Please try again.';
-        showErrors([message]);
-      })
-      .submitAbstract(form);
-  });
-
-  renumberAuthors();
-  updateWordCount();
-})();
+const tabs=document.querySelectorAll('.tab'),programs=document.querySelectorAll('.program');
+tabs.forEach(tab=>tab.addEventListener('click',()=>{tabs.forEach(t=>t.classList.remove('active'));programs.forEach(p=>p.classList.remove('active'));tab.classList.add('active');document.getElementById(tab.dataset.target).classList.add('active')}));
+const menuButton=document.querySelector('.menu'),nav=document.querySelector('nav');
+menuButton.addEventListener('click',()=>{const open=nav.classList.toggle('open');menuButton.setAttribute('aria-expanded',String(open))});
+nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{nav.classList.remove('open');menuButton.setAttribute('aria-expanded','false')}));
 </script>
 </body>
 </html>
